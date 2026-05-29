@@ -1,0 +1,21 @@
+# Render Blueprint — static site, no build step.
+# Docs: https://render.com/docs/blueprint-spec
+services:
+  - type: web
+    name: befach-rice
+    runtime: static
+    # No build step — the site is plain HTML/CSS/JS already in the repo.
+    buildCommand: "echo 'static site — nothing to build'"
+    staticPublishPath: .
+    # Preview deploys for every pull request.
+    pullRequestPreviewsEnabled: true
+    headers:
+      # Cache product creatives + lab-report PDFs for a day.
+      - path: /befach-rice/*
+        name: Cache-Control
+        value: "public, max-age=86400, stale-while-revalidate=604800"
+    routes:
+      # Friendly URL: /wellness → the landing page (optional alias).
+      - type: rewrite
+        source: /wellness
+        destination: /index.html

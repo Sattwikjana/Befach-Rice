@@ -40,6 +40,13 @@ python3 -m http.server 8000
 
 This is a static site — pick any host. **No build command, output/publish directory is the repo root.**
 
+### Render (recommended — `render.yaml` included)
+1. [dashboard.render.com](https://dashboard.render.com) → **New → Static Site** (or **New → Blueprint** to use `render.yaml`)
+2. Connect this repo → Render auto-detects the blueprint:
+   - Build command: *(none)* · Publish directory: `.`
+3. **Create** → live at `https://befach-rice.onrender.com` in ~1 min
+4. **Settings → Custom Domains** → add your domain → Render shows the exact DNS record to add at GoDaddy
+
 ### Vercel
 1. Import this repo at [vercel.com/new](https://vercel.com/new)
 2. Framework preset: **Other** · Build command: *(empty)* · Output dir: *(leave default / root)*

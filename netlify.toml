@@ -1,0 +1,10 @@
+# Netlify config — static site, no build step.
+[build]
+  publish = "."
+  command = ""
+
+# Long-ish cache for product creatives & reports.
+[[headers]]
+  for = "/befach-rice/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400, stale-while-revalidate=604800"

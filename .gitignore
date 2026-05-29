@@ -1,0 +1,22 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+
+# editor / IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# logs / env
+*.log
+.env
+.env.*
+
+# dependency / build artifacts (none expected — static site)
+node_modules/
+.vercel
+.netlify
+dist/

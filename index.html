@@ -305,6 +305,14 @@
   .sim-chart .ctitle{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;flex-wrap:wrap;gap:8px}
   .sim-chart .ctitle h4{font-size:1.05rem;color:var(--cocoa-dk)}
   .sim-chart .ctitle span{font-size:.78rem;color:var(--ink-soft);font-weight:600}
+  .sim-duo{display:grid;grid-template-columns:1fr;gap:18px;margin-top:6px}
+  .sim-single{margin-top:6px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 14px 10px}
+  .combo-svg{display:block}
+  .mini{margin:0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 12px 8px}
+  .mini figcaption{display:flex;align-items:center;gap:7px;font-size:.82rem;font-weight:700;color:var(--cocoa-dk);margin-bottom:4px;line-height:1.2}
+  .mini figcaption i{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+  .mini figcaption b{margin-left:auto;font-size:.7rem;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  .mini-svg{display:block}
   svg .grid line{stroke:var(--line);stroke-width:1}
   svg .axis{stroke:#C8B294;stroke-width:1.4}
   .replay{margin-top:14px;display:inline-flex;align-items:center;gap:8px;background:var(--cream-2);color:var(--cocoa-dk);border:none;padding:11px 20px;border-radius:100px;font-family:var(--sans);font-weight:700;font-size:.86rem;cursor:none;transition:.2s}
@@ -418,18 +426,19 @@
   .awcard small{font-size:.7rem;color:var(--ink-soft);letter-spacing:.04em}
 
   /* global */
-  .global{background:linear-gradient(160deg,var(--orange) 0%,var(--orange-dk) 100%);color:#fff;position:relative;overflow:hidden}
-  .global::before,.global::after{content:"";position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
-  .global::before{width:480px;height:480px;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);top:-160px;right:-100px}
-  .global::after{width:380px;height:380px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);bottom:-140px;left:-80px}
+  .global{background:linear-gradient(155deg,var(--cocoa-dk) 0%,var(--cocoa) 46%,var(--orange-deep) 100%);color:#fff;position:relative;overflow:hidden}
+  .global::before,.global::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+  .global::before{width:520px;height:520px;background:radial-gradient(circle,rgba(224,164,88,.30),transparent 70%);top:-180px;right:-120px}
+  .global::after{width:420px;height:420px;background:radial-gradient(circle,rgba(232,119,46,.28),transparent 70%);bottom:-160px;left:-90px}
   .global-wrap{position:relative;z-index:1;text-align:center}
   .global .shead h2,.global .shead p{color:#fff}
   .global .eyebrow{color:var(--cream)}
   .global .shead p{color:rgba(255,255,255,.85)}
   .flag-row{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:40px}
   .flag{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:80px}
-  .flag .fg{width:64px;height:42px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:800;color:var(--orange-dk);box-shadow:var(--shadow-sm);overflow:hidden;font-size:.84rem}
-  .flag b{font-size:.94rem;font-weight:700}
+  .flag .fg{width:80px;height:54px;border-radius:10px;object-fit:cover;display:block;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.25);box-shadow:var(--shadow-sm);overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}
+  .flag:hover .fg{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.28)}
+  .flag b{font-size:.94rem;font-weight:700;color:#fff}
 
   /* shop */
   #shop{background:linear-gradient(180deg,var(--cream),var(--paper))}
@@ -871,7 +880,7 @@
     <div><b data-count="50">50</b><span>GI · Lab-Certified Low</span></div>
     <div><b data-count="10" data-suffix=" Lakh+">10 Lakh+</b><span>Households served</span></div>
     <div><b data-count="7" data-suffix=" yrs">7 yrs</b><span>Of trust</span></div>
-    <div><b data-count="5" data-suffix=" countries">5 countries</b><span>Global exports</span></div>
+    <div><b data-count="6" data-suffix=" countries">6 countries</b><span>Global exports</span></div>
     <div><b data-count="28" data-suffix=".33%">28.33%</b><span>Amylose · slow-release</span></div>
   </div>
 </section>
@@ -1007,7 +1016,7 @@
         <div class="ss-step-content">
           <div class="ss-num">01</div>
           <h3>From the paddy field</h3>
-          <p>Befach Low-GI Rice was developed by agricultural scientists through pedigree breeding of multiple parent lines — Japonica (Japanese variety), Sona Masoori (Andhra), and many other Indian rice varieties. The result: a grain with a favourable nutrient profile and a unique starch arrangement that's associated with slower digestion and a naturally lower glycaemic response.</p>
+          <p>Befach Low-GI Rice was developed by agricultural scientists through pedigree breeding of multiple parent lines — Japonica (Japanese variety), Sona Masoori (Andhra), and many other Indian rice varieties. The result: a grain with a favourable nutrient profile and a unique starch arrangement that's associated with slower digestion and a naturally lower Glycemic response.</p>
         </div>
       </div>
 
@@ -1043,7 +1052,7 @@
         <div class="ss-step-content">
           <div class="ss-num">04</div>
           <h3>From fields, to your plate</h3>
-          <p>Delivered pan-India and exported to Iran, USA, Mauritius, Kuwait, Brazil. Cash on delivery available. 10 lakh+ households have already switched. Your turn.</p>
+          <p>Delivered pan-India and exported to UAE, Iran, Kuwait, Mauritius, USA, Ireland. Cash on delivery available. 10 lakh+ households have already switched. Your turn.</p>
         </div>
       </div>
     </div>
@@ -1054,7 +1063,7 @@
 <section id="sim" class="pad">
   <div class="wrap">
     <div class="shead rv">
-      <span class="eyebrow">Interactive · See it for yourself</span>
+      <span class="eyebrow">Interactive See it for yourself</span>
       <h2>Watch what rice does to your blood sugar</h2>
       <p>Real data from the official lab report. The same plate of food, two very different glucose responses. Toggle the rice and watch the curve move.</p>
     </div>
@@ -1062,21 +1071,11 @@
     <div class="sim-card rv">
       <div class="sim-side">
         <span class="eyebrow">Glucose Response Simulator</span>
-        <h3>Pick what's on the plate</h3>
-        <p>Post-meal blood glucose over 5 hours. Curves modeled from UniQ Nutri Bio-Sciences lab data (ISO 26642:2010).</p>
-        <div class="sim-toggle">
-          <button class="regular on" data-type="regular" onclick="setRice('regular')">
-            <span class="sw"></span>
-            <span>Regular white rice<br><small style="opacity:.7;font-weight:500">GI ~73 · peak 180 mg/dL @ 60min</small></span>
-          </button>
-          <button class="befach" data-type="befach" onclick="setRice('befach')">
-            <span class="sw"></span>
-            <span>Befach Diet &amp; Diabetic Rice<br><small style="opacity:.7;font-weight:500">GI 50 · peak 145 mg/dL @ 90min</small></span>
-          </button>
-        </div>
+        <h3>Same plate. Two very different curves.</h3>
+        <p>Post-meal blood glucose over 5 hours, modeled from UniQ Nutri Bio-Sciences lab data (ISO 26642:2010). No clicks needed — scroll the charts into view and both draw themselves, side by side.</p>
         <div class="sim-readout">
-          <div class="big" id="peakVal">180 <span>mg/dL peak</span></div>
-          <small id="peakNote">Sharp spike ~60 min after eating</small>
+          <div class="big" style="color:var(--gold)">35 <span>mg/dL lower peak</span></div>
+          <small>Befach peaks at just 145 mg/dL vs 180 for regular white rice — and settles back faster.</small>
         </div>
         <div class="sim-meta">
           Source: <b>UniQ Nutri Bio-Sciences LLP</b>, Report No. UNBS/26-27-526. Mean of n=10 healthy human subjects. Method: ISO 26642:2010.
@@ -1085,29 +1084,16 @@
       <div class="sim-chart">
         <div class="ctitle">
           <h4>Blood glucose · post-meal (5 hours)</h4>
-          <span id="simLabel">Showing: Regular white rice</span>
+          <span>Blood sugar · mg/dL</span>
         </div>
-        <svg id="glChart" viewBox="0 0 560 300" width="100%" role="img" aria-label="Blood glucose response curve over 5 hours">
-          <g class="grid" id="gridLines"></g>
-          <line class="axis" x1="48" y1="20" x2="48" y2="252"/>
-          <line class="axis" x1="48" y1="252" x2="540" y2="252"/>
-          <g id="yLabels" font-family="Hanken Grotesk" font-size="11" fill="#7A6B5C"></g>
-          <g id="xLabels" font-family="Hanken Grotesk" font-size="11" fill="#7A6B5C"></g>
-          <rect x="48" y="170" width="492" height="52" fill="#F0B963" opacity="0.18"/>
-          <text x="54" y="164" font-family="Hanken Grotesk" font-size="10" fill="#C5560F" font-weight="700">healthy range 70–140 mg/dL</text>
-          <path id="curve" fill="none" stroke="#9B6B4C" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path id="curveFill" fill="#9B6B4C" opacity="0.10"/>
-          <circle id="dot" r="6.5" fill="#9B6B4C" stroke="#fff" stroke-width="2.5" cx="48" cy="230"/>
-          <text id="dotLabel" font-family="Fraunces" font-size="15" font-weight="700" fill="#C5560F" text-anchor="middle"></text>
-        </svg>
+        <div class="sim-single">
+          <svg id="chartCombined" class="combo-svg" viewBox="0 0 540 280" width="100%" role="img" aria-label="Blood glucose response comparison — regular white rice versus Befach Diet and Diabetic Rice over 5 hours"></svg>
+        </div>
         <div class="legend">
-          <span><i style="background:#9B6B4C" id="legSwatch"></i><span id="legText">Regular white rice</span></span>
+          <span><i style="background:#9B6B4C"></i>Regular</span>
+          <span><i style="background:#E66E1E"></i>Befach</span>
           <span><i style="background:#F0B963;opacity:.5"></i>Healthy range (70–140 mg/dL)</span>
         </div>
-        <button class="replay magnetic" onclick="animateCurve()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a9 9 0 0 1 14.8-3.4L23 10M1 14l4.7 4.4A9 9 0 0 0 20.5 15"/></svg>
-          Replay animation
-        </button>
       </div>
     </div>
   </div>
@@ -1159,15 +1145,15 @@
         <div class="sd-body">
           <h3>How the rice was developed</h3>
           <p>Befach Low‑GI Rice was developed by agricultural scientists through <b>pedigree breeding of multiple parent lines</b> of different rice grains — Japonica (a Japanese rice variety), Sona Masoori (Andhra), and many other rice varieties available in India.</p>
-          <p>The grain offers a <b>favourable nutrient profile</b>, with slightly higher protein and niacin (vitamin B3) than commonly used South Indian rice varieties. Microscopic studies of the grain structure show a <b>unique starch arrangement</b> that is associated with slower digestion and a naturally lower glycaemic response.</p>
+          <p>The grain offers a <b>favourable nutrient profile</b>, with slightly higher protein and niacin (vitamin B3) than commonly used South Indian rice varieties. Microscopic studies of the grain structure show a <b>unique starch arrangement</b> that is associated with slower digestion and a naturally lower Glycemic response.</p>
         </div>
       </div>
 
       <div class="sd-block rv" style="transition-delay:.08s">
         <div class="sd-num">02</div>
         <div class="sd-body">
-          <h3>How its low glycaemic index was proven</h3>
-          <p>The glycaemic index (GI) of RNR 15048 — which we brand as Befach Low‑GI Rice — was measured in a human study at the <b>National Institute of Nutrition (ICMR‑NIN), Hyderabad</b>, under institutional ethics approval. <b>54 healthy adults</b> consumed glucose (reference), regular white rice, and Befach Low‑GI Rice on different days, while their blood sugar was tracked for two hours after each meal.</p>
+          <h3>How its low Glycemic index was proven</h3>
+          <p>The Glycemic index (GI) of RNR 15048 — which we brand as Befach Low‑GI Rice — was measured in a human study at the <b>National Institute of Nutrition (ICMR‑NIN), Hyderabad</b>, under institutional ethics approval. <b>54 healthy adults</b> consumed glucose (reference), regular white rice, and Befach Low‑GI Rice on different days, while their blood sugar was tracked for two hours after each meal.</p>
           <p>Using standard GI calculations, Befach Rice showed a <b>mean GI of 51.72 ± 3.39</b>, placing it firmly in the low‑GI category (≤ 55) and significantly lower than ordinary white rice (GI ≈ 73). The current production batch was re‑tested in 2026 by UniQ Nutri Bio‑Sciences (NABL‑accredited, ISO 26642:2010) and certified at <b>GI = 50</b>.</p>
         </div>
       </div>
@@ -1553,14 +1539,15 @@
   <div class="wrap global-wrap">
     <div class="rv">
       <span class="eyebrow">India to the world</span>
-      <h2 style="margin:14px 0 14px">India's pioneer. Now in 5 countries.</h2>
+      <h2 style="margin:14px 0 14px">India's pioneer. Now in 6 countries.</h2>
       <p>Befach is India's largest seller to other low-sugar rice brands. We export Befach Diet &amp; Diabetic Rice to:</p>
       <div class="flag-row">
-        <div class="flag"><div class="fg" style="background:linear-gradient(180deg,#239F40 33%,#fff 33% 66%,#DA0000 66%)">IR</div><b>Iran</b></div>
-        <div class="flag"><div class="fg" style="background:linear-gradient(180deg,#B22234 50%,#fff 50%);color:#3C3B6E">USA</div><b>USA</b></div>
-        <div class="flag"><div class="fg" style="background:linear-gradient(180deg,#EA2839 25%,#1A206D 25% 50%,#FFD500 50% 75%,#00A04D 75%);color:#fff">MU</div><b>Mauritius</b></div>
-        <div class="flag"><div class="fg" style="background:linear-gradient(180deg,#007A3D 33%,#fff 33% 66%,#CE1126 66%);color:#000">KW</div><b>Kuwait</b></div>
-        <div class="flag"><div class="fg" style="background:#009C3B;color:#FFDF00">BR</div><b>Brazil</b></div>
+        <div class="flag"><img class="fg" src="https://flagcdn.com/w160/ae.png" srcset="https://flagcdn.com/w320/ae.png 2x" alt="UAE flag" loading="lazy"><b>UAE</b></div>
+        <div class="flag"><img class="fg" src="https://flagcdn.com/w160/ir.png" srcset="https://flagcdn.com/w320/ir.png 2x" alt="Iran flag" loading="lazy"><b>Iran</b></div>
+        <div class="flag"><img class="fg" src="https://flagcdn.com/w160/kw.png" srcset="https://flagcdn.com/w320/kw.png 2x" alt="Kuwait flag" loading="lazy"><b>Kuwait</b></div>
+        <div class="flag"><img class="fg" src="https://flagcdn.com/w160/mu.png" srcset="https://flagcdn.com/w320/mu.png 2x" alt="Mauritius flag" loading="lazy"><b>Mauritius</b></div>
+        <div class="flag"><img class="fg" src="https://flagcdn.com/w160/us.png" srcset="https://flagcdn.com/w320/us.png 2x" alt="USA flag" loading="lazy"><b>USA</b></div>
+        <div class="flag"><img class="fg" src="https://flagcdn.com/w160/ie.png" srcset="https://flagcdn.com/w320/ie.png 2x" alt="Ireland flag" loading="lazy"><b>Ireland</b></div>
       </div>
     </div>
   </div>
@@ -1572,7 +1559,7 @@
     <div class="shead rv">
       <span class="eyebrow">Clinical credibility</span>
       <h2>Built to be shown to your doctor</h2>
-      <p>Not a wellness gimmick. A grain with an independent glycemic-response report and peer-reviewed research you can hand to any clinician.</p>
+      <p>Not a wellness gimmick. A grain with an independent Glycemic-response report and peer-reviewed research you can hand to any clinician.</p>
     </div>
     <div class="doc-row rv">
       <div class="doc-chip"><div class="dic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"/><path d="m9 12 2 2 4-4"/></svg></div><div>NABL-validated GI<small>UniQ Nutri · ISO 26642:2010</small></div></div>
@@ -1918,100 +1905,101 @@ document.querySelectorAll('[data-count]').forEach(el=>countObs.observe(el));
   document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
 })();
 
-/* simulator (5 hour curves — real data from UniQ report) */
-const PAD_L=48, PAD_R=540, TOP=20, BOT=252;
-const xMin=0, xMax=300;
-const yMin=70, yMax=210;
-function X(m){ return PAD_L + (m-xMin)/(xMax-xMin)*(PAD_R-PAD_L); }
-function Y(v){ return BOT - (v-yMin)/(yMax-yMin)*(BOT-TOP); }
-(function setupGrid(){
-  const g=document.getElementById('gridLines');
-  const yl=document.getElementById('yLabels');
-  const xl=document.getElementById('xLabels');
-  [70,100,140,170,210].forEach(v=>{
-    const y=Y(v);
-    g.innerHTML+=`<line x1="${PAD_L}" y1="${y}" x2="${PAD_R}" y2="${y}"/>`;
-    yl.innerHTML+=`<text x="${PAD_L-10}" y="${y+4}" text-anchor="end">${v}</text>`;
-  });
-  [0,60,120,180,240,300].forEach(m=>{
-    const x=X(m);
-    xl.innerHTML+=`<text x="${x}" y="270" text-anchor="middle">${m===0?'0':m+'m'}</text>`;
-  });
-})();
-/* real data points from UniQ report, mg/dL */
+/* simulator — single chart with two lines, auto-play on scroll (real data from UniQ report) */
 const POINTS = {
-  regular:[ [0,100],[60,180],[120,155],[180,140],[240,120],[300,100] ],
+  regular:[ [0,100],[55,200],[120,170],[180,148],[240,122],[300,100] ],
   befach :[ [0,100],[60,135],[90,145],[100,130],[180,105],[240,90],[300,90] ]
 };
-const META = {
-  regular:{ color:'#9B6B4C', peak:180, peakTime:60, label:'Regular white rice', note:'Sharp spike — peak 180 mg/dL at 60 min' },
-  befach :{ color:'#E66E1E', peak:145, peakTime:90, label:'Befach Diet & Diabetic Rice', note:'Gentle rise — peak 145 mg/dL at 90 min, then settles' }
-};
-let current='regular';
+const COLORS = { regular:'#9B6B4C', befach:'#E66E1E' };
+/* smooth (Catmull-Rom) interpolation — gives rounded curves instead of angular segments */
 function interp(pts, m){
   for(let i=0;i<pts.length-1;i++){
     if(m>=pts[i][0] && m<=pts[i+1][0]){
-      const t = (m-pts[i][0])/(pts[i+1][0]-pts[i][0]);
-      return pts[i][1] + t*(pts[i+1][1]-pts[i][1]);
+      const p0 = pts[i-1] || pts[i], p1 = pts[i], p2 = pts[i+1], p3 = pts[i+2] || pts[i+1];
+      const t = (m-p1[0])/(p2[0]-p1[0]), t2=t*t, t3=t2*t;
+      return 0.5*((2*p1[1]) + (-p0[1]+p2[1])*t
+        + (2*p0[1]-5*p1[1]+4*p2[1]-p3[1])*t2
+        + (-p0[1]+3*p1[1]-3*p2[1]+p3[1])*t3);
     }
   }
   return pts[pts.length-1][1];
 }
-function pathFor(type, upto){
-  const pts = POINTS[type];
-  const end = upto===undefined? xMax : upto;
-  let d='';
-  for(let m=0;m<=end;m+=4){
-    const x=X(m), y=Y(interp(pts,m));
-    d += (m===0?`M${x},${y}`:` L${x},${y}`);
-  }
-  const lastX=X(end);
-  const f = d + ` L${lastX},${BOT} L${X(0)},${BOT} Z`;
-  return {d,f};
-}
-let animTimer=null;
-function animateCurve(){
-  const meta=META[current];
-  const curve=document.getElementById('curve');
-  const fill=document.getElementById('curveFill');
-  const dot=document.getElementById('dot');
-  const dotLabel=document.getElementById('dotLabel');
-  curve.setAttribute('stroke',meta.color);
-  fill.setAttribute('fill',meta.color);
-  dot.setAttribute('fill',meta.color);
-  clearInterval(animTimer);
-  let m=0;
-  animTimer=setInterval(()=>{
-    m+=5;
-    if(m>=xMax){ m=xMax; clearInterval(animTimer); }
-    const p=pathFor(current,m);
-    curve.setAttribute('d',p.d);
-    fill.setAttribute('d',p.f);
-    const v=interp(POINTS[current],m);
-    const x=X(m), y=Y(v);
-    dot.setAttribute('cx',x); dot.setAttribute('cy',y);
-    dotLabel.setAttribute('x', Math.min(x,520));
-    dotLabel.setAttribute('y', y-14);
-    dotLabel.textContent = Math.round(v)+' mg/dL';
-  },14);
-}
-function setRice(type){
-  current=type;
-  document.querySelectorAll('.sim-toggle button').forEach(b=>{
-    b.classList.toggle('on', b.dataset.type===type);
+function setupComboChart(svg){
+  const L=42, R=528, T=18, B=232, xMax=300, yMin=70, yMax=210;
+  const X = m => L + m/xMax*(R-L);
+  const Y = v => B - (v-yMin)/(yMax-yMin)*(B-T);
+  let grid='', yl='', xl='';
+  [70,140,210].forEach(v=>{
+    const y=Y(v);
+    grid += `<line x1="${L}" y1="${y}" x2="${R}" y2="${y}"/>`;
+    yl   += `<text x="${L-7}" y="${y+3}" text-anchor="end">${v}</text>`;
   });
-  const meta=META[type];
-  document.getElementById('simLabel').textContent='Showing: '+meta.label;
-  document.getElementById('peakVal').innerHTML = meta.peak+' <span>mg/dL peak</span>';
-  document.getElementById('peakNote').textContent = meta.note;
-  document.getElementById('legSwatch').style.background=meta.color;
-  document.getElementById('legText').textContent=meta.label;
-  animateCurve();
+  [0,60,120,180,240,300].forEach(m=>{
+    xl += `<text x="${X(m)}" y="${B+20}" text-anchor="middle">${m===0?'0':m/60+'h'}</text>`;
+  });
+  const bandTop=Y(140), bandH=Y(70)-Y(140);
+  /* build a series group per type — fill, line, dot, label */
+  const series = type => `
+    <path class="cfill-${type}" fill="${COLORS[type]}" opacity="0.08"/>
+    <path class="cline-${type}" fill="none" stroke="${COLORS[type]}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle class="cdot-${type}" r="5" fill="${COLORS[type]}" stroke="#fff" stroke-width="2"/>
+    <text class="clab-${type}" font-family="Fraunces" font-size="12" font-weight="700" fill="${COLORS[type]}" text-anchor="middle"></text>`;
+  svg.innerHTML = `
+    <g class="grid">${grid}</g>
+    <rect x="${L}" y="${bandTop}" width="${R-L}" height="${bandH}" fill="#F0B963" opacity="0.18"/>
+    <line class="axis" x1="${L}" y1="${T}" x2="${L}" y2="${B}"/>
+    <line class="axis" x1="${L}" y1="${B}" x2="${R}" y2="${B}"/>
+    <g font-family="Hanken Grotesk" font-size="9" fill="#7A6B5C">${yl}</g>
+    <g font-family="Hanken Grotesk" font-size="9" fill="#7A6B5C">${xl}</g>
+    ${series('regular')}
+    ${series('befach')}`;
+  function refs(type){
+    return {
+      pts: POINTS[type],
+      line: svg.querySelector(`.cline-${type}`),
+      fill: svg.querySelector(`.cfill-${type}`),
+      dot:  svg.querySelector(`.cdot-${type}`),
+      lab:  svg.querySelector(`.clab-${type}`)
+    };
+  }
+  const REG = refs('regular'), BEF = refs('befach');
+  function pathFor(pts, upto){
+    let d='';
+    for(let m=0;m<=upto;m+=4){
+      const x=X(m), y=Y(interp(pts,m));
+      d += (m===0?`M${x},${y}`:` L${x},${y}`);
+    }
+    return { d, f: d + ` L${X(upto)},${B} L${X(0)},${B} Z` };
+  }
+  function drawSeries(s, m){
+    const p=pathFor(s.pts, m);
+    s.line.setAttribute('d',p.d); s.fill.setAttribute('d',p.f);
+    const v=interp(s.pts,m), x=X(m), y=Y(v);
+    s.dot.setAttribute('cx',x); s.dot.setAttribute('cy',y);
+    s.lab.setAttribute('x', Math.max(L+16, Math.min(x, R-16)));
+    s.lab.setAttribute('y', y-9);
+    s.lab.textContent = Math.round(v)+' mg/dL';
+  }
+  let timer=null;
+  function animate(){
+    clearInterval(timer);
+    let m=0;
+    timer=setInterval(()=>{
+      m+=5;
+      if(m>=xMax){ m=xMax; clearInterval(timer); }
+      drawSeries(REG, m);
+      drawSeries(BEF, m);
+    },14);
+  }
+  return { animate };
 }
+const combo = setupComboChart(document.getElementById('chartCombined'));
+function animateBoth(){ combo.animate(); }
+/* re-animate each time the simulator scrolls back into view (up or down) */
 const simObs=new IntersectionObserver((es)=>{
-  es.forEach(e=>{ if(e.isIntersecting){ animateCurve(); simObs.disconnect(); } });
+  es.forEach(e=>{ if(e.isIntersecting) animateBoth(); });
 },{threshold:.3});
-simObs.observe(document.getElementById('glChart'));
+simObs.observe(document.getElementById('sim'));
 
 /* quiz */
 let qStep=0; const qAns=[];

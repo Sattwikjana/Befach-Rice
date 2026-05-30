@@ -275,6 +275,12 @@
   .sim-chart .ctitle{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;flex-wrap:wrap;gap:8px}
   .sim-chart .ctitle h4{font-size:1.05rem;color:var(--cocoa-dk)}
   .sim-chart .ctitle span{font-size:.78rem;color:var(--ink-soft);font-weight:600}
+  .sim-duo{display:grid;grid-template-columns:1fr;gap:18px;margin-top:6px}
+  .mini{margin:0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 12px 8px}
+  .mini figcaption{display:flex;align-items:center;gap:7px;font-size:.82rem;font-weight:700;color:var(--cocoa-dk);margin-bottom:4px;line-height:1.2}
+  .mini figcaption i{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+  .mini figcaption b{margin-left:auto;font-size:.7rem;color:var(--ink-soft);font-weight:700;white-space:nowrap}
+  .mini-svg{display:block}
   svg .grid line{stroke:var(--line);stroke-width:1}
   svg .axis{stroke:#C8B294;stroke-width:1.4}
   .replay{margin-top:14px;display:inline-flex;align-items:center;gap:8px;background:var(--cream-2);color:var(--cocoa-dk);border:none;padding:11px 20px;border-radius:100px;font-family:var(--sans);font-weight:700;font-size:.86rem;cursor:none;transition:.2s}
@@ -410,7 +416,7 @@
   .plan.feat{border:2px solid var(--orange);box-shadow:var(--shadow)}
   .plan .tag{position:absolute;top:14px;right:14px;background:linear-gradient(135deg,var(--orange) 0%,var(--orange-dk) 100%);color:#fff;font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:7px 14px;border-radius:100px;white-space:nowrap;z-index:2;box-shadow:0 6px 14px -4px rgba(230,110,30,.5)}
   .plan-thumb{aspect-ratio:1/1;background:linear-gradient(170deg,var(--cream) 0%,var(--cream-2) 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;border-bottom:1px solid var(--line)}
-  .plan-thumb img{width:78%;transition:transform .65s var(--ease-out);filter:drop-shadow(0 14px 18px rgba(58,30,16,.3))}
+  .plan-thumb img{max-width:78%;max-height:82%;width:auto;height:auto;object-fit:contain;transition:transform .65s var(--ease-out);filter:drop-shadow(0 14px 18px rgba(58,30,16,.3))}
   .plan:hover .plan-thumb img{transform:scale(1.1) rotate(-3deg)}
   .plan-thumb::before{content:"";position:absolute;width:65%;height:65%;border-radius:50%;background:radial-gradient(circle,rgba(240,185,99,.32),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
   .plan-body{padding:30px 28px 32px;display:flex;flex-direction:column;flex-grow:1}
@@ -427,20 +433,23 @@
 
   /* bento gallery */
   .bento{background:var(--paper)}
-  .bento-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:130px;gap:18px}
-  .bcell{position:relative;border-radius:22px;overflow:hidden;background:var(--cream);box-shadow:var(--shadow-sm);transition:transform .45s var(--ease-out),box-shadow .45s,filter .35s;cursor:none}
-  .bcell::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(35,18,9,.55) 100%);z-index:2;opacity:.7;transition:opacity .35s}
-  .bcell:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
-  .bcell:hover::before{opacity:.5}
-  .bcell img{width:100%;height:100%;object-fit:cover;transition:transform .85s var(--ease-out)}
-  .bcell:hover img{transform:scale(1.07)}
-  .bcell .blabel{position:absolute;bottom:18px;left:20px;right:20px;z-index:3;color:#fff;font-family:var(--serif);font-size:1.1rem;font-weight:600;line-height:1.2;text-shadow:0 2px 8px rgba(0,0,0,.5)}
-  .bcell .btag{position:absolute;top:16px;left:16px;z-index:3;background:rgba(255,255,255,.94);color:var(--orange-dk);font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:100px}
-  .b1{grid-column:span 5;grid-row:span 4}
-  .b2{grid-column:span 4;grid-row:span 2}
-  .b3{grid-column:span 3;grid-row:span 2}
-  .b4{grid-column:span 4;grid-row:span 2}
-  .b5{grid-column:span 3;grid-row:span 2}
+  .bento-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:20px;aspect-ratio:2/1}
+  .bcell{position:relative;min-height:0;border-radius:26px;overflow:hidden;background:var(--cream);box-shadow:var(--shadow-sm);transition:transform .55s var(--ease-out),box-shadow .55s,filter .35s;cursor:none}
+  .bcell::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(35,18,9,.66) 0%,rgba(35,18,9,.14) 40%,rgba(35,18,9,0) 64%);opacity:.85;transition:opacity .5s var(--ease-out)}
+  .bcell:hover{transform:translateY(-7px);box-shadow:var(--shadow-lg)}
+  .bcell:hover::after{opacity:1}
+  .bcell img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .95s var(--ease-out)}
+  .bcell:hover img{transform:scale(1.06)}
+  .bcell .blabel{position:absolute;left:22px;right:22px;bottom:20px;z-index:3;color:#fff;font-family:var(--serif);font-weight:600;font-size:1.02rem;line-height:1.25;letter-spacing:-.01em;text-shadow:0 2px 16px rgba(0,0,0,.4);transform:translateY(8px);opacity:0;transition:transform .55s var(--ease-out),opacity .55s}
+  .bcell:hover .blabel{transform:translateY(0);opacity:1}
+  .b1 .blabel{font-size:1.4rem;max-width:80%}
+  .bcell .btag{position:absolute;top:18px;right:18px;z-index:3;background:rgba(255,255,255,.92);color:var(--orange-dk);font-size:.64rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:6px 13px;border-radius:100px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+  /* layout:  B1 B1 | 2 4  /  B1 B1 | 3 5  (b1 = big square, rest = small squares) */
+  .b1{grid-column:1 / span 2;grid-row:1 / span 2}
+  .b2{grid-column:3;grid-row:1}
+  .b4{grid-column:4;grid-row:1}
+  .b3{grid-column:3;grid-row:2}
+  .b5{grid-column:4;grid-row:2}
 
   /* results */
   /* marketplace ratings (Amazon + Flipkart) */
@@ -544,10 +553,10 @@
 
   /* creative strip */
   .creative-strip{background:var(--paper);padding:50px 0;overflow:hidden}
-  .cs-track{display:flex;gap:18px;animation:slide 50s linear infinite}
-  .cs-card{flex:0 0 260px;height:340px;border-radius:18px;overflow:hidden;position:relative;box-shadow:var(--shadow-sm);background:var(--cream);cursor:none;transition:transform .4s var(--ease)}
+  .cs-track{display:flex;align-items:center;gap:18px;animation:slide 50s linear infinite}
+  .cs-card{flex:0 0 260px;border-radius:18px;overflow:hidden;position:relative;box-shadow:var(--shadow-sm);background:var(--cream);cursor:none;transition:transform .4s var(--ease)}
   .cs-card:hover{transform:translateY(-6px) scale(1.02)}
-  .cs-card img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-out)}
+  .cs-card img{display:block;width:100%;height:auto;object-fit:contain;transition:transform .8s var(--ease-out)}
   .cs-card:hover img{transform:scale(1.08)}
 
   /* final */
@@ -621,9 +630,8 @@
     .foot-grid{grid-template-columns:1fr 1fr;gap:32px}
     .doc-row{gap:18px}
     .stickybar .sbtxt{font-size:.78rem}
-    .bento-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:140px}
-    .b1{grid-column:span 6;grid-row:span 3}
-    .b2,.b3,.b4,.b5{grid-column:span 3;grid-row:span 2}
+    .bento-grid{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,minmax(232px,1fr));aspect-ratio:auto}
+    .b1,.b2,.b3,.b4,.b5{grid-column:auto;grid-row:auto}
     .scrollshow .ss-inner{gap:60px}
     .ss-step,.ss-step.reverse{grid-template-columns:1fr;gap:28px}
     .ss-step.reverse .ss-step-img{order:0}
@@ -640,6 +648,7 @@
     .wrap{padding:0 18px}
     .pad{padding:72px 0}.pad-sm{padding:58px 0}
     .sim-side,.sim-chart{padding:30px}
+    .sim-duo{grid-template-columns:1fr;gap:24px}
     .quiz-body{padding:36px 26px}
     .foot-grid{grid-template-columns:1fr}
     .hero{padding:54px 0 80px}
@@ -648,9 +657,9 @@
     .stickybar{padding:6px 6px 6px 14px;min-width:calc(100% - 24px);gap:10px}
     .stickybar .sbimg{width:42px;height:42px}
     .stickybar .btn{padding:11px 18px;font-size:.86rem}
-    .bento-grid{grid-template-columns:1fr;grid-auto-rows:200px}
-    .b1,.b2,.b3,.b4,.b5{grid-column:span 1;grid-row:span 1}
-    .cs-card{flex:0 0 220px;height:280px}
+    .bento-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:none;grid-auto-rows:minmax(200px,1fr);aspect-ratio:auto}
+    .b1,.b2,.b3,.b4,.b5{grid-column:auto;grid-row:auto}
+    .cs-card{flex:0 0 220px}
     .res-stats{grid-template-columns:1fr;gap:12px}
     .aw-grid{grid-template-columns:repeat(2,1fr)}
     .res-paper{padding:32px 24px}
@@ -694,7 +703,7 @@
 <nav id="topnav">
   <div class="nav-in">
     <a href="#" class="brand" aria-label="Befach Wellness — Diet & Diabetic White Rice">
-      <img src="/befach-rice/logo-horizontal.jpg" alt="Befach Wellness">
+      <img src="befach-rice/logo-horizontal.jpg" alt="Befach Wellness">
     </a>
     <div class="nav-links" id="navLinks">
       <a href="#sim">How it works</a>
@@ -766,7 +775,7 @@
         <div class="ring r1"></div>
         <div class="ring r2"></div>
         <div class="ring r3"></div>
-        <img class="product-hero" src="/befach-rice/pack-front.jpg" alt="Befach Diet & Diabetic White Rice pack" loading="eager" decoding="async">
+        <img class="product-hero" src="befach-rice/pack-front.jpg" alt="Befach Diet & Diabetic White Rice pack" loading="eager" decoding="async">
       </div>
       <div class="float-card fc-1">
         <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
@@ -825,7 +834,7 @@
         <h2>A GI of 50 means a 30–40% lower glucose spike than regular white rice.</h2>
         <p>The Glycemic Index measures how fast a food raises blood glucose. Foods at GI ≤ 55 are classified as Low GI — the band diabetologists recommend for blood-sugar management. Befach Rice sits at 50, with 28.33% amylose (high) and slow-release starch that keeps your post-meal curve flat for hours.</p>
         <div class="hero-cta">
-          <a href="/befach-rice/reports/glycemic-index-report.pdf" download target="_blank" class="btn btn-primary magnetic">Download full GI report (PDF)
+          <a href="befach-rice/reports/glycemic-index-report.pdf" download target="_blank" class="btn btn-primary magnetic">Download full GI report (PDF)
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
           </a>
         </div>
@@ -857,7 +866,7 @@
         </div>
       </div>
       <div class="wc-pack rv" style="transition-delay:.1s">
-        <img src="/befach-rice/pack-front.jpg" alt="Befach Diet & Diabetic White Rice">
+        <img src="befach-rice/pack-front.jpg" alt="Befach Diet & Diabetic White Rice">
       </div>
       <div class="wc-col right rv" style="transition-delay:.2s">
         <div class="wc-item">
@@ -919,9 +928,10 @@
     </div>
     <div class="ss-inner">
       <div class="ss-step rv">
-        <div class="ss-step-img">
-          <span class="ss-tag">Origin</span>
-          <img src="/befach-rice/fields-to-plate.jpg" alt="From the paddy field — Sona Masoori, hand-harvested">
+        <div class="ss-step-img" style="aspect-ratio:1/1">
+          <span class="ss-tag" style="left:auto;right:18px">Origin</span>
+          <img src="befach-rice/fields-to-plate1.jpg" alt="From the paddy field — Sona Masoori, hand-harvested">
+
         </div>
         <div class="ss-step-content">
           <div class="ss-num">01</div>
@@ -931,9 +941,9 @@
       </div>
 
       <div class="ss-step reverse rv">
-        <div class="ss-step-img">
-          <span class="ss-tag">Engineered</span>
-          <img src="/befach-rice/wellness-grain.jpg" alt="Every grain considered — high amylose, slow-release starch">
+        <div class="ss-step-img" style="aspect-ratio:1/1">
+          <span class="ss-tag" style="left:auto;right:18px">Engineered</span>
+          <img src="befach-rice/wellness-grain1.jpg" alt="Every grain considered — high amylose, slow-release starch">
         </div>
         <div class="ss-step-content">
           <div class="ss-num">02</div>
@@ -943,9 +953,9 @@
       </div>
 
       <div class="ss-step rv">
-        <div class="ss-step-img">
-          <span class="ss-tag">Into your kitchen</span>
-          <img src="/befach-rice/kitchen-bowl.jpg" alt="Cooked Sona Masoori rice with the Befach pack in a kitchen">
+        <div class="ss-step-img" style="aspect-ratio:1/1">
+          <span class="ss-tag" style="left:auto;right:18px">Into your kitchen</span>
+          <img src="befach-rice/kitchen-bowl1.jpg" alt="Cooked Sona Masoori rice with the Befach pack in a kitchen">
         </div>
         <div class="ss-step-content">
           <div class="ss-num">03</div>
@@ -955,9 +965,9 @@
       </div>
 
       <div class="ss-step reverse rv">
-        <div class="ss-step-img">
-          <span class="ss-tag">Delivered</span>
-          <img src="/befach-rice/hand-pack.jpg" alt="Befach Diet & Diabetic Rice pack delivered to your hand">
+        <div class="ss-step-img" style="aspect-ratio:1/1">
+          <span class="ss-tag" style="left:auto;right:18px">Delivered</span>
+          <img src="befach-rice/hand-pack1.jpg" alt="Befach Diet & Diabetic Rice pack delivered to your hand">
         </div>
         <div class="ss-step-content">
           <div class="ss-num">04</div>
@@ -981,21 +991,11 @@
     <div class="sim-card rv">
       <div class="sim-side">
         <span class="eyebrow">Glucose Response Simulator</span>
-        <h3>Pick what's on the plate</h3>
-        <p>Post-meal blood glucose over 5 hours. Curves modeled from UniQ Nutri Bio-Sciences lab data (ISO 26642:2010).</p>
-        <div class="sim-toggle">
-          <button class="regular on" data-type="regular" onclick="setRice('regular')">
-            <span class="sw"></span>
-            <span>Regular white rice<br><small style="opacity:.7;font-weight:500">GI ~73 · peak 180 mg/dL @ 60min</small></span>
-          </button>
-          <button class="befach" data-type="befach" onclick="setRice('befach')">
-            <span class="sw"></span>
-            <span>Befach Diet &amp; Diabetic Rice<br><small style="opacity:.7;font-weight:500">GI 50 · peak 145 mg/dL @ 90min</small></span>
-          </button>
-        </div>
+        <h3>Same plate. Two very different curves.</h3>
+        <p>Post-meal blood glucose over 5 hours, modeled from UniQ Nutri Bio-Sciences lab data (ISO 26642:2010). No clicks needed — scroll the charts into view and both draw themselves, side by side.</p>
         <div class="sim-readout">
-          <div class="big" id="peakVal">180 <span>mg/dL peak</span></div>
-          <small id="peakNote">Sharp spike ~60 min after eating</small>
+          <div class="big" style="color:var(--gold)">35 <span>mg/dL lower peak</span></div>
+          <small>Befach peaks at just 145 mg/dL vs 180 for regular white rice — and settles back faster.</small>
         </div>
         <div class="sim-meta">
           Source: <b>UniQ Nutri Bio-Sciences LLP</b>, Report No. UNBS/26-27-526. Mean of n=10 healthy human subjects. Method: ISO 26642:2010.
@@ -1004,29 +1004,23 @@
       <div class="sim-chart">
         <div class="ctitle">
           <h4>Blood glucose · post-meal (5 hours)</h4>
-          <span id="simLabel">Showing: Regular white rice</span>
+          <span>Auto-plays as you scroll · mg/dL</span>
         </div>
-        <svg id="glChart" viewBox="0 0 560 300" width="100%" role="img" aria-label="Blood glucose response curve over 5 hours">
-          <g class="grid" id="gridLines"></g>
-          <line class="axis" x1="48" y1="20" x2="48" y2="252"/>
-          <line class="axis" x1="48" y1="252" x2="540" y2="252"/>
-          <g id="yLabels" font-family="Hanken Grotesk" font-size="11" fill="#7A6B5C"></g>
-          <g id="xLabels" font-family="Hanken Grotesk" font-size="11" fill="#7A6B5C"></g>
-          <rect x="48" y="170" width="492" height="52" fill="#F0B963" opacity="0.18"/>
-          <text x="54" y="164" font-family="Hanken Grotesk" font-size="10" fill="#C5560F" font-weight="700">healthy range 70–140 mg/dL</text>
-          <path id="curve" fill="none" stroke="#9B6B4C" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-          <path id="curveFill" fill="#9B6B4C" opacity="0.10"/>
-          <circle id="dot" r="6.5" fill="#9B6B4C" stroke="#fff" stroke-width="2.5" cx="48" cy="230"/>
-          <text id="dotLabel" font-family="Fraunces" font-size="15" font-weight="700" fill="#C5560F" text-anchor="middle"></text>
-        </svg>
+        <div class="sim-duo">
+          <figure class="mini">
+            <figcaption><i style="background:#9B6B4C"></i>Regular white rice<b>GI ~73</b></figcaption>
+            <svg id="chartRegular" class="mini-svg" viewBox="0 0 540 180" width="100%" role="img" aria-label="Blood glucose response for regular white rice over 5 hours"></svg>
+          </figure>
+          <figure class="mini">
+            <figcaption><i style="background:#E66E1E"></i>Befach Diet &amp; Diabetic Rice<b>GI 50</b></figcaption>
+            <svg id="chartBefach" class="mini-svg" viewBox="0 0 540 180" width="100%" role="img" aria-label="Blood glucose response for Befach Diet and Diabetic Rice over 5 hours"></svg>
+          </figure>
+        </div>
         <div class="legend">
-          <span><i style="background:#9B6B4C" id="legSwatch"></i><span id="legText">Regular white rice</span></span>
+          <span><i style="background:#9B6B4C"></i>Regular</span>
+          <span><i style="background:#E66E1E"></i>Befach</span>
           <span><i style="background:#F0B963;opacity:.5"></i>Healthy range (70–140 mg/dL)</span>
         </div>
-        <button class="replay magnetic" onclick="animateCurve()">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a9 9 0 0 1 14.8-3.4L23 10M1 14l4.7 4.4A9 9 0 0 0 20.5 15"/></svg>
-          Replay animation
-        </button>
       </div>
     </div>
   </div>
@@ -1116,7 +1110,7 @@
       <p>Eight independent reports from NABL-accredited labs. Download, print, share with your diabetologist. No marketing claims — just the data.</p>
     </div>
     <div class="rep-grid">
-      <a href="/befach-rice/reports/glycemic-index-report.pdf" download target="_blank" class="repcard rv">
+      <a href="befach-rice/reports/glycemic-index-report.pdf" download target="_blank" class="repcard rv">
         <div class="repic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 17 4-8 4 4 6-10"/></svg></div>
         <div class="repmeta"><i></i>GI = 50 · ISO 26642:2010</div>
         <h4>Glycemic Index Report</h4>
@@ -1125,49 +1119,49 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
         </div>
       </a>
-      <a href="/befach-rice/reports/in-vivo-testing.pdf" download target="_blank" class="repcard rv" style="transition-delay:.05s">
+      <a href="befach-rice/reports/in-vivo-testing.pdf" download target="_blank" class="repcard rv" style="transition-delay:.05s">
         <div class="repic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 11H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2z"/><path d="M11 11V7a4 4 0 0 1 8 0v4"/></svg></div>
         <div class="repmeta"><i></i>50% lower glucose vs normal</div>
         <h4>In-Vivo Testing Report</h4>
         <p>UniQ Nutri Bio-Sciences. Head-to-head vs normal rice (GI 83±5).</p>
         <div class="repdl">Download PDF<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
       </a>
-      <a href="/befach-rice/reports/amylose-report.pdf" download target="_blank" class="repcard rv" style="transition-delay:.1s">
+      <a href="befach-rice/reports/amylose-report.pdf" download target="_blank" class="repcard rv" style="transition-delay:.1s">
         <div class="repic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
         <div class="repmeta"><i></i>28.33% · ISO 6647-1</div>
         <h4>Amylose Analysis</h4>
         <p>Eurofins India, April 2026. High amylose = slow-release starch.</p>
         <div class="repdl">Download PDF<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
       </a>
-      <a href="/befach-rice/reports/heavy-metal-safety.pdf" download target="_blank" class="repcard rv" style="transition-delay:.15s">
+      <a href="befach-rice/reports/heavy-metal-safety.pdf" download target="_blank" class="repcard rv" style="transition-delay:.15s">
         <div class="repic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"/><path d="m9 12 2 2 4-4"/></svg></div>
         <div class="repmeta"><i></i>All 8 metals BLQ</div>
         <h4>Heavy Metal Safety</h4>
         <p>Equinox Labs. Arsenic, Cadmium, Lead, Mercury — all undetectable.</p>
         <div class="repdl">Download PDF<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
       </a>
-      <a href="/befach-rice/reports/nutrients.pdf" download target="_blank" class="repcard rv" style="transition-delay:.2s">
+      <a href="befach-rice/reports/nutrients.pdf" download target="_blank" class="repcard rv" style="transition-delay:.2s">
         <div class="repic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8M16 17H8M10 9H8"/></svg></div>
         <div class="repmeta"><i></i>Nutritional analysis</div>
         <h4>Nutrients Certificate</h4>
         <p>UniQ Nutri. Per 100g: 360 kcal, 7.85g protein, 3.10mg iron.</p>
         <div class="repdl">Download PDF<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
       </a>
-      <a href="/befach-rice/reports/health-safety.pdf" download target="_blank" class="repcard rv" style="transition-delay:.25s">
+      <a href="befach-rice/reports/health-safety.pdf" download target="_blank" class="repcard rv" style="transition-delay:.25s">
         <div class="repic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg></div>
         <div class="repmeta"><i></i>Compliance</div>
         <h4>Health &amp; Safety Cert</h4>
         <p>Full health and food safety compliance documentation.</p>
         <div class="repdl">Download PDF<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
       </a>
-      <a href="/befach-rice/reports/ajfn-research-paper.pdf" download target="_blank" class="repcard rv" style="transition-delay:.3s">
+      <a href="befach-rice/reports/ajfn-research-paper.pdf" download target="_blank" class="repcard rv" style="transition-delay:.3s">
         <div class="repic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
         <div class="repmeta"><i></i>Peer-reviewed · 2019</div>
         <h4>Published Research (AJFN)</h4>
         <p>American Journal of Food &amp; Nutrition. HbA1c drop 7.06→6.09.</p>
         <div class="repdl">Download PDF<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg></div>
       </a>
-      <a href="/befach-rice/reports/brochure.pdf" download target="_blank" class="repcard rv" style="transition-delay:.35s">
+      <a href="befach-rice/reports/brochure.pdf" download target="_blank" class="repcard rv" style="transition-delay:.35s">
         <div class="repic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
         <div class="repmeta"><i></i>Product brochure</div>
         <h4>Product Brochure</h4>
@@ -1247,7 +1241,7 @@
         <div class="title">Development of Low Glycemic Index Rice and Its Effectiveness in the Regulation of Postprandial Glucose Response in Type 2 Diabetes</div>
         <div class="authors">Sobhana PP, Murugaiha JS, Hrusikesh P, Epparapalli S, Korrapati D — National Institute of Nutrition, ICMR Hyderabad</div>
         <div class="doi">DOI: 10.12691/ajfn-7-4-6 · 80 subjects · 3-month intervention</div>
-        <a href="/befach-rice/reports/ajfn-research-paper.pdf" download target="_blank" class="btn btn-gold magnetic" style="margin-top:6px;align-self:flex-start">Read the paper
+        <a href="befach-rice/reports/ajfn-research-paper.pdf" download target="_blank" class="btn btn-gold magnetic" style="margin-top:6px;align-self:flex-start">Read the paper
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -1305,30 +1299,30 @@
       <h2>From paddy field to your plate</h2>
     </div>
     <div class="bento-grid">
-      <div class="bcell b1 rv lb-trigger" data-img="/befach-rice/fields-to-plate.jpg">
-        <img src="/befach-rice/fields-to-plate.jpg" alt="From fields to your plate">
+      <div class="bcell b1 rv lb-trigger" data-img="befach-rice/benefits1.jpg">
+        <img src="befach-rice/benefits1.jpg" alt="Benefits of diabetic rice">
+        <span class="btag">Benefits</span>
+        <span class="blabel">Whole family. Low sugar. Daily use.</span>
+      </div>
+      <div class="bcell b2 rv lb-trigger" data-img="befach-rice/fields-to-plate1.jpg" style="transition-delay:.08s">
+        <img src="befach-rice/fields-to-plate1.jpg" alt="From fields to your plate">
         <span class="btag">Origin</span>
         <span class="blabel">From the field, by hand — premium aged paddy</span>
       </div>
-      <div class="bcell b2 rv lb-trigger" data-img="/befach-rice/kitchen-bowl.jpg" style="transition-delay:.08s">
-        <img src="/befach-rice/kitchen-bowl.jpg" alt="Befach low sugar rice in a kitchen">
-        <span class="btag">Daily use</span>
-        <span class="blabel">Suitable for the whole family</span>
-      </div>
-      <div class="bcell b3 rv lb-trigger" data-img="/befach-rice/wellness-grain.jpg" style="transition-delay:.16s">
-        <img src="/befach-rice/wellness-grain.jpg" alt="Wellness begins with every grain">
+      <div class="bcell b4 rv lb-trigger" data-img="befach-rice/wellness-grain1.jpg" style="transition-delay:.16s">
+        <img src="befach-rice/wellness-grain1.jpg" alt="Wellness begins with every grain">
         <span class="btag">Wellness</span>
         <span class="blabel">Wellness begins with every grain</span>
       </div>
-      <div class="bcell b4 rv lb-trigger" data-img="/befach-rice/hand-pack.jpg" style="transition-delay:.24s">
-        <img src="/befach-rice/hand-pack.jpg" alt="Befach diabetic rice pack in hand">
+      <div class="bcell b3 rv lb-trigger" data-img="befach-rice/kitchen-bowl1.jpg" style="transition-delay:.24s">
+        <img src="befach-rice/kitchen-bowl1.jpg" alt="Befach low sugar rice in a kitchen">
+        <span class="btag">Daily use</span>
+        <span class="blabel">Suitable for the whole family</span>
+      </div>
+      <div class="bcell b5 rv lb-trigger" data-img="befach-rice/hand-pack1.jpg" style="transition-delay:.32s">
+        <img src="befach-rice/hand-pack1.jpg" alt="Befach diabetic rice pack in hand">
         <span class="btag">Best-seller</span>
         <span class="blabel">From fields to your plate</span>
-      </div>
-      <div class="bcell b5 rv lb-trigger" data-img="/befach-rice/benefits.jpg" style="transition-delay:.32s">
-        <img src="/befach-rice/benefits.jpg" alt="Benefits of diabetic rice">
-        <span class="btag">Benefits</span>
-        <span class="blabel">Whole family. Low sugar. Daily use.</span>
       </div>
     </div>
   </div>
@@ -1346,7 +1340,7 @@
     <div class="plans plans-2">
       <div class="plan feat rv">
         <span class="tag">Best value</span>
-        <div class="plan-thumb"><img src="/befach-rice/pack-front.jpg" alt="Befach Diet & Diabetic White Rice 4.5 kg pack"></div>
+        <div class="plan-thumb"><img src="befach-rice/pack-front1.jpg" alt="Befach Diet & Diabetic White Rice 4.5 kg pack"></div>
         <div class="plan-body">
           <h3>4.5 KG Pack</h3>
           <p class="sub">The monthly staple. Best ₹/kg.</p>
@@ -1363,7 +1357,7 @@
       </div>
 
       <div class="plan rv" style="transition-delay:.1s">
-        <div class="plan-thumb"><img src="/befach-rice/pack-1kg.png" alt="Befach Diet & Diabetic White Rice 1 kg pack of 2"></div>
+        <div class="plan-thumb"><img src="befach-rice/pack-1kg.png" alt="Befach Diet & Diabetic White Rice 1 kg pack of 2"></div>
         <div class="plan-body">
           <h3>1 KG · Pack of 2</h3>
           <p class="sub">Try-before-you-stock. Two 1 kg bags.</p>
@@ -1576,22 +1570,22 @@
 <!-- CREATIVE MARQUEE -->
 <section class="creative-strip">
   <div class="cs-track">
-    <div class="cs-card lb-trigger" data-img="/befach-rice/bestseller.jpg"><img src="/befach-rice/bestseller.jpg" alt="Your next bestseller"></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/kitchen-bowl.jpg"><img src="/befach-rice/kitchen-bowl.jpg" alt="Low sugar rice in the kitchen"></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/fields-to-plate.jpg"><img src="/befach-rice/fields-to-plate.jpg" alt="From the fields"></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/wellness-grain.jpg"><img src="/befach-rice/wellness-grain.jpg" alt="Wellness in every grain"></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/benefits.jpg"><img src="/befach-rice/benefits.jpg" alt="Benefits of diabetic rice"></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/hand-pack.jpg"><img src="/befach-rice/hand-pack.jpg" alt="From fields to your plate"></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/weight-management.png"><img src="/befach-rice/weight-management.png" alt="Weight management"></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/glucometer.png"><img src="/befach-rice/glucometer.png" alt="Control diabetes"></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/pack-paddy.png"><img src="/befach-rice/pack-paddy.png" alt="Pack with paddy"></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/benefits-wheel.png"><img src="/befach-rice/benefits-wheel.png" alt="Benefits wheel"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/fields-to-plate.jpg"><img src="befach-rice/fields-to-plate1.jpg" alt="From the fields"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/wellness-grain.jpg"><img src="befach-rice/wellness-grain1.jpg" alt="Wellness in every grain"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/benefits.jpg"><img src="befach-rice/benefits1.jpg" alt="Benefits of diabetic rice"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/kitchen-bowl.jpg"><img src="befach-rice/kitchen-bowl1.jpg" alt="Low sugar rice in the kitchen"></div>     
+    <div class="cs-card lb-trigger" data-img="befach-rice/hand-pack.jpg"><img src="befach-rice/hand-pack1.jpg" alt="From fields to your plate"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/bestseller.jpg"><img src="befach-rice/bestseller1.jpg" alt="Your next bestseller"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/weight-management.png"><img src="befach-rice/weight-management.png" alt="Weight management"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/glucometer.png"><img src="befach-rice/glucometer.png" alt="Control diabetes"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/pack-paddy.png"><img src="befach-rice/pack-paddy.png" alt="Pack with paddy"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/benefits-wheel.png"><img src="befach-rice/benefits-wheel.png" alt="Benefits wheel"></div>
     <!-- dupe -->
-    <div class="cs-card lb-trigger" data-img="/befach-rice/bestseller.jpg"><img src="/befach-rice/bestseller.jpg" alt=""></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/kitchen-bowl.jpg"><img src="/befach-rice/kitchen-bowl.jpg" alt=""></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/fields-to-plate.jpg"><img src="/befach-rice/fields-to-plate.jpg" alt=""></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/wellness-grain.jpg"><img src="/befach-rice/wellness-grain.jpg" alt=""></div>
-    <div class="cs-card lb-trigger" data-img="/befach-rice/weight-management.png"><img src="/befach-rice/weight-management.png" alt=""></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/fields-to-plate.jpg"><img src="befach-rice/fields-to-plate1.jpg" alt=""></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/wellness-grain.jpg"><img src="befach-rice/wellness-grain1.jpg" alt=""></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/kitchen-bowl.jpg"><img src="befach-rice/kitchen-bowl1.jpg" alt=""></div> 
+    <div class="cs-card lb-trigger" data-img="befach-rice/bestseller.jpg"><img src="befach-rice/bestseller1.jpg" alt=""></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/weight-management.png"><img src="befach-rice/weight-management.png" alt=""></div>
   </div>
 </section>
 
@@ -1635,7 +1629,7 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <img src="/befach-rice/logo-horizontal.jpg" alt="Befach Wellness">
+        <img src="befach-rice/logo-horizontal.jpg" alt="Befach Wellness">
         <p>Premium GI-50 Telangana Sona Masoori rice for people who refuse to give up rice. A Befach Wellness brand, manufactured by Befach 4X Private Limited, Hyderabad.</p>
         <div class="foot-licenses">
           <span><b>FSSAI Lic No:</b> 13620014000587</span>
@@ -1654,7 +1648,7 @@
         </div>
       </div>
       <div><h4>Shop</h4><a href="#shop">4.5 kg pack · ₹600</a><a href="#shop">1 kg × 2 pack · ₹280</a><a href="#quiz">Find your pack</a><a href="#reports">Lab reports</a></div>
-      <div><h4>Lab &amp; Science</h4><a href="#reports">All lab reports</a><a href="#sim">Glucose simulator</a><a href="#research">Published research</a><a href="/befach-rice/reports/brochure.pdf" download target="_blank">Product brochure</a></div>
+      <div><h4>Lab &amp; Science</h4><a href="#reports">All lab reports</a><a href="#sim">Glucose simulator</a><a href="#research">Published research</a><a href="befach-rice/reports/brochure.pdf" download target="_blank">Product brochure</a></div>
       <div><h4>Company</h4><a href="#">About Befach Wellness</a><a href="tel:+918760209090">+91 87602 09090</a><a href="mailto:info@befach.com">info@befach.com</a><a href="#">Befach 4X Pvt. Ltd., Hyderabad</a></div>
     </div>
     <div class="foot-bot">
@@ -1666,7 +1660,7 @@
 
 <!-- STICKY ADD TO CART -->
 <div class="stickybar" id="stickybar">
-  <div class="sbimg"><img src="/befach-rice/pack-front.jpg" alt=""></div>
+  <div class="sbimg"><img src="befach-rice/pack-front.jpg" alt=""></div>
   <div class="sbtxt"><b>Diet &amp; Diabetic White Rice · GI 50</b><span>4.5 kg pack · ₹600 · free shipping</span></div>
   <a href="#shop" class="btn btn-primary magnetic">Shop now</a>
 </div>
@@ -1803,36 +1797,12 @@ document.querySelectorAll('[data-count]').forEach(el=>countObs.observe(el));
   document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
 })();
 
-/* simulator (5 hour curves — real data from UniQ report) */
-const PAD_L=48, PAD_R=540, TOP=20, BOT=252;
-const xMin=0, xMax=300;
-const yMin=70, yMax=210;
-function X(m){ return PAD_L + (m-xMin)/(xMax-xMin)*(PAD_R-PAD_L); }
-function Y(v){ return BOT - (v-yMin)/(yMax-yMin)*(BOT-TOP); }
-(function setupGrid(){
-  const g=document.getElementById('gridLines');
-  const yl=document.getElementById('yLabels');
-  const xl=document.getElementById('xLabels');
-  [70,100,140,170,210].forEach(v=>{
-    const y=Y(v);
-    g.innerHTML+=`<line x1="${PAD_L}" y1="${y}" x2="${PAD_R}" y2="${y}"/>`;
-    yl.innerHTML+=`<text x="${PAD_L-10}" y="${y+4}" text-anchor="end">${v}</text>`;
-  });
-  [0,60,120,180,240,300].forEach(m=>{
-    const x=X(m);
-    xl.innerHTML+=`<text x="${x}" y="270" text-anchor="middle">${m===0?'0':m+'m'}</text>`;
-  });
-})();
-/* real data points from UniQ report, mg/dL */
+/* simulator — two side-by-side charts, auto-play on scroll (real data from UniQ report) */
 const POINTS = {
   regular:[ [0,100],[60,180],[120,155],[180,140],[240,120],[300,100] ],
   befach :[ [0,100],[60,135],[90,145],[100,130],[180,105],[240,90],[300,90] ]
 };
-const META = {
-  regular:{ color:'#9B6B4C', peak:180, peakTime:60, label:'Regular white rice', note:'Sharp spike — peak 180 mg/dL at 60 min' },
-  befach :{ color:'#E66E1E', peak:145, peakTime:90, label:'Befach Diet & Diabetic Rice', note:'Gentle rise — peak 145 mg/dL at 90 min, then settles' }
-};
-let current='regular';
+const COLORS = { regular:'#9B6B4C', befach:'#E66E1E' };
 function interp(pts, m){
   for(let i=0;i<pts.length-1;i++){
     if(m>=pts[i][0] && m<=pts[i+1][0]){
@@ -1842,61 +1812,68 @@ function interp(pts, m){
   }
   return pts[pts.length-1][1];
 }
-function pathFor(type, upto){
-  const pts = POINTS[type];
-  const end = upto===undefined? xMax : upto;
-  let d='';
-  for(let m=0;m<=end;m+=4){
-    const x=X(m), y=Y(interp(pts,m));
-    d += (m===0?`M${x},${y}`:` L${x},${y}`);
-  }
-  const lastX=X(end);
-  const f = d + ` L${lastX},${BOT} L${X(0)},${BOT} Z`;
-  return {d,f};
-}
-let animTimer=null;
-function animateCurve(){
-  const meta=META[current];
-  const curve=document.getElementById('curve');
-  const fill=document.getElementById('curveFill');
-  const dot=document.getElementById('dot');
-  const dotLabel=document.getElementById('dotLabel');
-  curve.setAttribute('stroke',meta.color);
-  fill.setAttribute('fill',meta.color);
-  dot.setAttribute('fill',meta.color);
-  clearInterval(animTimer);
-  let m=0;
-  animTimer=setInterval(()=>{
-    m+=5;
-    if(m>=xMax){ m=xMax; clearInterval(animTimer); }
-    const p=pathFor(current,m);
-    curve.setAttribute('d',p.d);
-    fill.setAttribute('d',p.f);
-    const v=interp(POINTS[current],m);
-    const x=X(m), y=Y(v);
-    dot.setAttribute('cx',x); dot.setAttribute('cy',y);
-    dotLabel.setAttribute('x', Math.min(x,520));
-    dotLabel.setAttribute('y', y-14);
-    dotLabel.textContent = Math.round(v)+' mg/dL';
-  },14);
-}
-function setRice(type){
-  current=type;
-  document.querySelectorAll('.sim-toggle button').forEach(b=>{
-    b.classList.toggle('on', b.dataset.type===type);
+function setupMiniChart(svg, type){
+  const L=40, R=528, T=12, B=150, xMax=300, yMin=70, yMax=210;
+  const X = m => L + m/xMax*(R-L);
+  const Y = v => B - (v-yMin)/(yMax-yMin)*(B-T);
+  const color = COLORS[type], pts = POINTS[type];
+  let grid='', yl='', xl='';
+  [70,140,210].forEach(v=>{
+    const y=Y(v);
+    grid += `<line x1="${L}" y1="${y}" x2="${R}" y2="${y}"/>`;
+    yl   += `<text x="${L-7}" y="${y+3}" text-anchor="end">${v}</text>`;
   });
-  const meta=META[type];
-  document.getElementById('simLabel').textContent='Showing: '+meta.label;
-  document.getElementById('peakVal').innerHTML = meta.peak+' <span>mg/dL peak</span>';
-  document.getElementById('peakNote').textContent = meta.note;
-  document.getElementById('legSwatch').style.background=meta.color;
-  document.getElementById('legText').textContent=meta.label;
-  animateCurve();
+  [0,60,120,180,240,300].forEach(m=>{
+    xl += `<text x="${X(m)}" y="${B+20}" text-anchor="middle">${m===0?'0':m/60+'h'}</text>`;
+  });
+  const bandTop=Y(140), bandH=Y(70)-Y(140);
+  svg.innerHTML = `
+    <g class="grid">${grid}</g>
+    <rect x="${L}" y="${bandTop}" width="${R-L}" height="${bandH}" fill="#F0B963" opacity="0.18"/>
+    <line class="axis" x1="${L}" y1="${T}" x2="${L}" y2="${B}"/>
+    <line class="axis" x1="${L}" y1="${B}" x2="${R}" y2="${B}"/>
+    <g font-family="Hanken Grotesk" font-size="9" fill="#7A6B5C">${yl}</g>
+    <g font-family="Hanken Grotesk" font-size="9" fill="#7A6B5C">${xl}</g>
+    <path class="cfill" fill="${color}" opacity="0.10"/>
+    <path class="cline" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle class="cdot" r="5" fill="${color}" stroke="#fff" stroke-width="2"/>
+    <text class="clab" font-family="Fraunces" font-size="12" font-weight="700" fill="${color}" text-anchor="middle"></text>`;
+  const line=svg.querySelector('.cline'), fill=svg.querySelector('.cfill'),
+        dot=svg.querySelector('.cdot'), lab=svg.querySelector('.clab');
+  function pathFor(upto){
+    let d='';
+    for(let m=0;m<=upto;m+=4){
+      const x=X(m), y=Y(interp(pts,m));
+      d += (m===0?`M${x},${y}`:` L${x},${y}`);
+    }
+    return { d, f: d + ` L${X(upto)},${B} L${X(0)},${B} Z` };
+  }
+  let timer=null;
+  function animate(){
+    clearInterval(timer);
+    let m=0;
+    timer=setInterval(()=>{
+      m+=5;
+      if(m>=xMax){ m=xMax; clearInterval(timer); }
+      const p=pathFor(m);
+      line.setAttribute('d',p.d); fill.setAttribute('d',p.f);
+      const v=interp(pts,m), x=X(m), y=Y(v);
+      dot.setAttribute('cx',x); dot.setAttribute('cy',y);
+      lab.setAttribute('x', Math.max(L+16, Math.min(x, R-16)));
+      lab.setAttribute('y', y-9);
+      lab.textContent = Math.round(v)+' mg/dL';
+    },14);
+  }
+  return { animate };
 }
+const chartR = setupMiniChart(document.getElementById('chartRegular'), 'regular');
+const chartB = setupMiniChart(document.getElementById('chartBefach'), 'befach');
+function animateBoth(){ chartR.animate(); chartB.animate(); }
+/* re-animate each time the simulator scrolls back into view (up or down) */
 const simObs=new IntersectionObserver((es)=>{
-  es.forEach(e=>{ if(e.isIntersecting){ animateCurve(); simObs.disconnect(); } });
+  es.forEach(e=>{ if(e.isIntersecting) animateBoth(); });
 },{threshold:.3});
-simObs.observe(document.getElementById('glChart'));
+simObs.observe(document.getElementById('sim'));
 
 /* quiz */
 let qStep=0; const qAns=[];

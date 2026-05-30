@@ -46,8 +46,8 @@
     --ease-out:cubic-bezier(.16,1,.3,1);
   }
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;scroll-padding-top:84px}
-  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.6;overflow-x:hidden;cursor:none;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);line-height:1.6;overflow-x:hidden;cursor:none}
   body.no-custom-cursor{cursor:auto}
   h1,h2,h3,h4{font-family:var(--serif);font-weight:600;line-height:1.1;letter-spacing:-.01em}
   a{color:inherit;text-decoration:none}
@@ -103,6 +103,36 @@
   .nav-cta{display:flex;align-items:center;gap:14px}
   .cart-pill{display:flex;align-items:center;gap:7px;font-weight:700;font-size:.9rem;color:var(--orange-dk);border:1.5px solid var(--line-warm);padding:10px 16px;border-radius:100px;background:var(--white);transition:.25s}
   .cart-pill:hover{border-color:var(--orange);transform:translateY(-2px)}
+  .cart-pill .cbadge{background:var(--orange);color:#fff;border-radius:100px;font-size:.72rem;font-weight:800;min-width:19px;height:19px;display:none;align-items:center;justify-content:center;padding:0 5px;line-height:1}
+  .cart-pill .cbadge.show{display:inline-flex}
+  /* cart drawer */
+  .cart-backdrop{position:fixed;inset:0;background:rgba(35,18,9,.5);backdrop-filter:blur(3px);opacity:0;visibility:hidden;transition:.3s;z-index:90}
+  .cart-backdrop.on{opacity:1;visibility:visible}
+  .cart-drawer{position:fixed;top:0;right:0;width:min(420px,100%);height:100%;background:var(--paper);box-shadow:-12px 0 40px rgba(35,18,9,.25);transform:translateX(100%);transition:transform .4s var(--ease);z-index:91;display:flex;flex-direction:column;cursor:auto}
+  .cart-drawer.on{transform:translateX(0)}
+  .cart-head{display:flex;align-items:center;justify-content:space-between;padding:22px 22px 16px;border-bottom:1px solid var(--line)}
+  .cart-head h3{font-family:var(--serif);font-size:1.3rem;color:var(--cocoa-deep);margin:0}
+  .cart-close{background:none;border:none;cursor:pointer;color:var(--ink-soft);padding:4px;line-height:0}
+  .cart-items{flex:1;overflow-y:auto;padding:6px 22px}
+  .cart-empty{text-align:center;color:var(--ink-soft);padding:60px 20px;font-weight:600;line-height:1.7}
+  .citem{display:flex;gap:14px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+  .citem>img{width:60px;height:60px;border-radius:12px;object-fit:cover;background:var(--cream-2);flex-shrink:0}
+  .citem .ci-info{flex:1;line-height:1.3}
+  .citem .ci-name{font-weight:700;color:var(--cocoa-deep);font-size:.95rem}
+  .citem .ci-price{color:var(--ink-soft);font-size:.85rem;font-weight:600}
+  .citem .ci-qty{display:flex;align-items:center;gap:8px;margin-top:7px}
+  .citem .ci-qty button{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--line-warm);background:var(--white);cursor:pointer;font-weight:700;color:var(--orange-dk);display:flex;align-items:center;justify-content:center;font-size:1rem;line-height:1;padding:0}
+  .citem .ci-remove{width:auto!important;height:auto!important;border:none!important;border-radius:0!important;color:var(--ink-soft)!important;font-size:.76rem!important;font-weight:600;text-decoration:underline;margin-left:4px}
+  .citem .ci-qnum{min-width:20px;text-align:center;font-weight:700}
+  .citem>b{font-weight:800;color:var(--cocoa-deep);white-space:nowrap}
+  .cart-foot{border-top:1px solid var(--line);padding:18px 22px 22px}
+  .cart-total{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+  .cart-total b{font-family:var(--serif);font-size:1.4rem;color:var(--cocoa-deep)}
+  .cart-foot .btn{width:100%}
+  .cart-note{text-align:center;font-size:.76rem;color:var(--ink-soft);margin-top:10px}
+  /* toast */
+  .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:var(--cocoa-deep);color:#fff;padding:13px 22px;border-radius:100px;font-weight:600;font-size:.9rem;box-shadow:var(--shadow-lg);opacity:0;visibility:hidden;transition:.3s;z-index:95;display:flex;align-items:center;gap:9px}
+  .toast.show{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
   .hamb{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:none;padding:8px}
   .hamb span{width:24px;height:2.4px;background:var(--cocoa-dk);border-radius:2px;transition:.3s}
 
@@ -275,12 +305,6 @@
   .sim-chart .ctitle{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;flex-wrap:wrap;gap:8px}
   .sim-chart .ctitle h4{font-size:1.05rem;color:var(--cocoa-dk)}
   .sim-chart .ctitle span{font-size:.78rem;color:var(--ink-soft);font-weight:600}
-  .sim-duo{display:grid;grid-template-columns:1fr;gap:18px;margin-top:6px}
-  .mini{margin:0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 12px 8px}
-  .mini figcaption{display:flex;align-items:center;gap:7px;font-size:.82rem;font-weight:700;color:var(--cocoa-dk);margin-bottom:4px;line-height:1.2}
-  .mini figcaption i{width:11px;height:11px;border-radius:50%;flex-shrink:0}
-  .mini figcaption b{margin-left:auto;font-size:.7rem;color:var(--ink-soft);font-weight:700;white-space:nowrap}
-  .mini-svg{display:block}
   svg .grid line{stroke:var(--line);stroke-width:1}
   svg .axis{stroke:#C8B294;stroke-width:1.4}
   .replay{margin-top:14px;display:inline-flex;align-items:center;gap:8px;background:var(--cream-2);color:var(--cocoa-dk);border:none;padding:11px 20px;border-radius:100px;font-family:var(--sans);font-weight:700;font-size:.86rem;cursor:none;transition:.2s}
@@ -413,10 +437,11 @@
   .plans.plans-2{grid-template-columns:repeat(2,1fr);max-width:880px;margin:0 auto}
   .plan{background:var(--white);border:1px solid var(--line);border-radius:26px;padding:0;display:flex;flex-direction:column;position:relative;transition:transform .4s var(--ease-out),box-shadow .4s;overflow:hidden}
   .plan:hover{transform:translateY(-10px);box-shadow:var(--shadow)}
-  .plan.feat{border:2px solid var(--orange);box-shadow:var(--shadow)}
+  .plan{cursor:pointer}
+  .plan.sel{border:2px solid var(--orange);box-shadow:var(--shadow)}
   .plan .tag{position:absolute;top:14px;right:14px;background:linear-gradient(135deg,var(--orange) 0%,var(--orange-dk) 100%);color:#fff;font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:7px 14px;border-radius:100px;white-space:nowrap;z-index:2;box-shadow:0 6px 14px -4px rgba(230,110,30,.5)}
   .plan-thumb{aspect-ratio:1/1;background:linear-gradient(170deg,var(--cream) 0%,var(--cream-2) 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;border-bottom:1px solid var(--line)}
-  .plan-thumb img{max-width:78%;max-height:82%;width:auto;height:auto;object-fit:contain;transition:transform .65s var(--ease-out);filter:drop-shadow(0 14px 18px rgba(58,30,16,.3))}
+  .plan-thumb img{width:78%;transition:transform .65s var(--ease-out);filter:drop-shadow(0 14px 18px rgba(58,30,16,.3))}
   .plan:hover .plan-thumb img{transform:scale(1.1) rotate(-3deg)}
   .plan-thumb::before{content:"";position:absolute;width:65%;height:65%;border-radius:50%;background:radial-gradient(circle,rgba(240,185,99,.32),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%)}
   .plan-body{padding:30px 28px 32px;display:flex;flex-direction:column;flex-grow:1}
@@ -433,23 +458,20 @@
 
   /* bento gallery */
   .bento{background:var(--paper)}
-  .bento-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr);gap:20px;aspect-ratio:2/1}
-  .bcell{position:relative;min-height:0;border-radius:26px;overflow:hidden;background:var(--cream);box-shadow:var(--shadow-sm);transition:transform .55s var(--ease-out),box-shadow .55s,filter .35s;cursor:none}
-  .bcell::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(35,18,9,.66) 0%,rgba(35,18,9,.14) 40%,rgba(35,18,9,0) 64%);opacity:.85;transition:opacity .5s var(--ease-out)}
-  .bcell:hover{transform:translateY(-7px);box-shadow:var(--shadow-lg)}
-  .bcell:hover::after{opacity:1}
-  .bcell img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .95s var(--ease-out)}
-  .bcell:hover img{transform:scale(1.06)}
-  .bcell .blabel{position:absolute;left:22px;right:22px;bottom:20px;z-index:3;color:#fff;font-family:var(--serif);font-weight:600;font-size:1.02rem;line-height:1.25;letter-spacing:-.01em;text-shadow:0 2px 16px rgba(0,0,0,.4);transform:translateY(8px);opacity:0;transition:transform .55s var(--ease-out),opacity .55s}
-  .bcell:hover .blabel{transform:translateY(0);opacity:1}
-  .b1 .blabel{font-size:1.4rem;max-width:80%}
-  .bcell .btag{position:absolute;top:18px;right:18px;z-index:3;background:rgba(255,255,255,.92);color:var(--orange-dk);font-size:.64rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:6px 13px;border-radius:100px;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
-  /* layout:  B1 B1 | 2 4  /  B1 B1 | 3 5  (b1 = big square, rest = small squares) */
-  .b1{grid-column:1 / span 2;grid-row:1 / span 2}
-  .b2{grid-column:3;grid-row:1}
-  .b4{grid-column:4;grid-row:1}
-  .b3{grid-column:3;grid-row:2}
-  .b5{grid-column:4;grid-row:2}
+  .bento-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:130px;gap:18px}
+  .bcell{position:relative;border-radius:22px;overflow:hidden;background:var(--cream);box-shadow:var(--shadow-sm);transition:transform .45s var(--ease-out),box-shadow .45s,filter .35s;cursor:none}
+  .bcell::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(35,18,9,.55) 100%);z-index:2;opacity:.7;transition:opacity .35s}
+  .bcell:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+  .bcell:hover::before{opacity:.5}
+  .bcell img{width:100%;height:100%;object-fit:cover;transition:transform .85s var(--ease-out)}
+  .bcell:hover img{transform:scale(1.07)}
+  .bcell .blabel{position:absolute;bottom:18px;left:20px;right:20px;z-index:3;color:#fff;font-family:var(--serif);font-size:1.1rem;font-weight:600;line-height:1.2;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+  .bcell .btag{position:absolute;top:16px;left:16px;z-index:3;background:rgba(255,255,255,.94);color:var(--orange-dk);font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;padding:6px 12px;border-radius:100px}
+  .b1{grid-column:span 5;grid-row:span 4}
+  .b2{grid-column:span 4;grid-row:span 2}
+  .b3{grid-column:span 3;grid-row:span 2}
+  .b4{grid-column:span 4;grid-row:span 2}
+  .b5{grid-column:span 3;grid-row:span 2}
 
   /* results */
   /* marketplace ratings (Amazon + Flipkart) */
@@ -553,10 +575,10 @@
 
   /* creative strip */
   .creative-strip{background:var(--paper);padding:50px 0;overflow:hidden}
-  .cs-track{display:flex;align-items:center;gap:18px;animation:slide 50s linear infinite}
-  .cs-card{flex:0 0 260px;border-radius:18px;overflow:hidden;position:relative;box-shadow:var(--shadow-sm);background:var(--cream);cursor:none;transition:transform .4s var(--ease)}
+  .cs-track{display:flex;gap:18px;animation:slide 50s linear infinite}
+  .cs-card{flex:0 0 260px;height:340px;border-radius:18px;overflow:hidden;position:relative;box-shadow:var(--shadow-sm);background:var(--cream);cursor:none;transition:transform .4s var(--ease)}
   .cs-card:hover{transform:translateY(-6px) scale(1.02)}
-  .cs-card img{display:block;width:100%;height:auto;object-fit:contain;transition:transform .8s var(--ease-out)}
+  .cs-card img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease-out)}
   .cs-card:hover img{transform:scale(1.08)}
 
   /* final */
@@ -574,7 +596,7 @@
   .foot-grid h4{color:var(--cream);font-size:.82rem;letter-spacing:.16em;text-transform:uppercase;margin-bottom:18px;font-family:var(--sans);font-weight:800}
   .foot-grid a{display:block;font-size:.92rem;margin-bottom:11px;transition:color .2s}
   .foot-grid a:hover{color:var(--gold)}
-  .foot-brand img{height:54px;margin-bottom:18px;filter:brightness(0) invert(1) opacity(.96)}
+  .foot-brand img{height:64px;margin-bottom:18px;background:#fff;padding:8px 14px;border-radius:14px}
   .foot-brand p{font-size:.92rem;max-width:26em;margin-bottom:18px;line-height:1.6}
   .foot-licenses{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
   .foot-licenses span{font-size:.78rem;color:rgba(255,244,224,.55);font-weight:600;letter-spacing:.04em}
@@ -617,27 +639,22 @@
   .lb-close{position:absolute;top:22px;right:22px;width:46px;height:46px;border-radius:50%;background:var(--white);color:var(--cocoa-dk);border:none;display:flex;align-items:center;justify-content:center;cursor:none;transition:.2s}
   .lb-close:hover{transform:rotate(90deg);background:var(--orange);color:#fff}
 
-  /* ============ RESPONSIVE ============ */
-
-  /* ---- Tablet (≤980px) ---- */
+  /* responsive */
   @media(max-width:980px){
-    .hero-grid,.nutri-wrap,.res-paper{grid-template-columns:1fr;gap:48px}
+    .hero-grid,.nutri-wrap,.res-paper{grid-template-columns:1fr;gap:50px}
     .sim-card{grid-template-columns:1fr}
-    .sci-grid,.plans,.res-grid,.steps,.learn-grid,.cook-grid,.wc-grid,.vs-grid{grid-template-columns:1fr}
-    .rep-grid,.safe-grid{grid-template-columns:repeat(2,1fr)}
+    .sci-grid,.plans,.res-grid,.steps,.learn-grid,.cook-grid,.rep-grid,.safe-grid,.wc-grid,.vs-grid{grid-template-columns:1fr}
     .res-stats{grid-template-columns:repeat(3,1fr)}
     .aw-grid{grid-template-columns:repeat(3,1fr)}
-    .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:rgba(255,251,239,.98);backdrop-filter:saturate(180%) blur(18px);-webkit-backdrop-filter:saturate(180%) blur(18px);flex-direction:column;align-items:stretch;padding:8px 0;border-bottom:1px solid var(--line);box-shadow:var(--shadow);gap:0}
+    .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--paper);flex-direction:column;align-items:flex-start;padding:20px 28px;border-bottom:1px solid var(--line);gap:18px}
     .nav-links.open{display:flex}
-    .nav-links a{padding:15px 28px;font-size:1rem;border-bottom:1px solid var(--line)}
-    .nav-links a::after{display:none}
-    .nav-links a:last-child{border-bottom:none}
     .hamb{display:flex}
     .foot-grid{grid-template-columns:1fr 1fr;gap:32px}
     .doc-row{gap:18px}
     .stickybar .sbtxt{font-size:.78rem}
-    .bento-grid{grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,minmax(232px,1fr));aspect-ratio:auto}
-    .b1,.b2,.b3,.b4,.b5{grid-column:auto;grid-row:auto}
+    .bento-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:140px}
+    .b1{grid-column:span 6;grid-row:span 3}
+    .b2,.b3,.b4,.b5{grid-column:span 3;grid-row:span 2}
     .scrollshow .ss-inner{gap:60px}
     .ss-step,.ss-step.reverse{grid-template-columns:1fr;gap:28px}
     .ss-step.reverse .ss-step-img{order:0}
@@ -645,18 +662,15 @@
     .ss-step-img{aspect-ratio:1;max-height:none}
     .ss-step .ss-num{font-size:3.8rem}
     .wc-col{order:2}.wc-pack{order:1}
-    .gichart-card{padding:44px 26px 26px}
-    .gichart-bars{height:360px;gap:14px}
-    .gibar .val{font-size:1.5rem;top:-34px}
-    .gibar.win .val{font-size:1.8rem}
+    .gichart-card{padding:48px 28px 28px}
+    .gichart-bars{height:380px;gap:14px}
+    .gibar .val{font-size:1.55rem;top:-34px}
+    .gibar.win .val{font-size:1.85rem}
   }
-
-  /* ---- Phone (≤640px) — premium mobile pass ---- */
-  @media(max-width:640px){
+  @media(max-width:560px){
     .wrap{padding:0 18px}
     .pad{padding:72px 0}.pad-sm{padding:58px 0}
     .sim-side,.sim-chart{padding:30px}
-    .sim-duo{grid-template-columns:1fr;gap:24px}
     .quiz-body{padding:36px 26px}
     .foot-grid{grid-template-columns:1fr}
     .hero{padding:54px 0 80px}
@@ -665,52 +679,21 @@
     .stickybar{padding:6px 6px 6px 14px;min-width:calc(100% - 24px);gap:10px}
     .stickybar .sbimg{width:42px;height:42px}
     .stickybar .btn{padding:11px 18px;font-size:.86rem}
-    .bento-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:none;grid-auto-rows:minmax(200px,1fr);aspect-ratio:auto}
-    .b1,.b2,.b3,.b4,.b5{grid-column:auto;grid-row:auto}
-    .cs-card{flex:0 0 220px}
+    .bento-grid{grid-template-columns:1fr;grid-auto-rows:200px}
+    .b1,.b2,.b3,.b4,.b5{grid-column:span 1;grid-row:span 1}
+    .cs-card{flex:0 0 220px;height:280px}
     .res-stats{grid-template-columns:1fr;gap:12px}
     .aw-grid{grid-template-columns:repeat(2,1fr)}
     .res-paper{padding:32px 24px}
     .gichart-card{padding:34px 16px 20px;border-radius:18px}
     .gichart-card-head{margin-bottom:22px}
     .gichart-card-head h4{font-size:.92rem}
-    .gichart-card-head .leg{font-size:.68rem;gap:12px}
-    .gichart-bars{height:240px;gap:7px}
-    .gibar{gap:9px}
-    .gibar .val{font-size:1.05rem;top:-22px}
-    .gibar.win .val{font-size:1.3rem}
-    .gibar .lbl{font-size:.7rem}
-
-    /* simulator + quiz padding */
-    .sim-side,.sim-chart{padding:28px 22px}
-    .quiz-body{padding:32px 22px}
-
-    /* footer centered single column */
-    .foot-grid{grid-template-columns:1fr;gap:28px;text-align:center}
-    .foot-brand img{margin-left:auto;margin-right:auto}
-    .foot-brand p,.foot-licenses,.foot-news{margin-left:auto;margin-right:auto}
-    .foot-soc{justify-content:center}
-    .foot-bot{justify-content:center;text-align:center;gap:8px}
-
-    /* sticky cart bar (full width, sits below the WA FAB) */
-    .stickybar{left:14px;right:14px;transform:translateX(0) translateY(160%);min-width:0;padding:7px 7px 7px 14px;gap:10px}
-    .stickybar.on{transform:translateX(0) translateY(0)}
-    .stickybar .sbtxt{font-size:.76rem}
-    .stickybar .sbimg{width:40px;height:40px}
-    .stickybar .btn{padding:11px 16px;font-size:.84rem}
-
-    /* WhatsApp FAB lifted above the sticky cart bar — no overlap */
-    .wa{width:52px;height:52px;right:14px;bottom:86px}
-  }
-
-  /* ---- Small phone (≤400px) ---- */
-  @media(max-width:400px){
-    .hero h1{font-size:clamp(2.1rem,11vw,2.7rem)}
-    .trust-in b{font-size:1.32rem}
-    .gibar .lbl{font-size:.64rem}
-    .stickybar .sbtxt b{font-size:.9rem}
-    .stickybar .sbtxt span{font-size:.72rem}
-    .nav-cta .btn-primary{padding:10px 15px;font-size:.86rem}
+    .gichart-card-head .leg{font-size:.7rem;gap:12px}
+    .gichart-bars{height:280px;gap:8px}
+    .gibar{gap:10px}
+    .gibar .val{font-size:1.1rem;top:-24px}
+    .gibar.win .val{font-size:1.35rem}
+    .gibar .lbl{font-size:.74rem}
   }
   @media(prefers-reduced-motion:reduce){
     *{animation:none!important;transition:none!important}
@@ -753,9 +736,9 @@
       <a href="#research">Research</a>
     </div>
     <div class="nav-cta">
-      <a href="#shop" class="cart-pill" aria-label="View cart">
+      <a href="#" class="cart-pill" id="cartPill" aria-label="View cart">
         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
-        Cart
+        Cart <span class="cbadge" id="cartBadge">0</span>
       </a>
       <a href="#shop" class="btn btn-primary magnetic" style="padding:12px 22px">Shop now</a>
       <button class="hamb" aria-label="Menu" id="hambBtn">
@@ -967,10 +950,9 @@
     </div>
     <div class="ss-inner">
       <div class="ss-step rv">
-        <div class="ss-step-img" style="aspect-ratio:1/1">
-          <span class="ss-tag" style="left:auto;right:18px">Origin</span>
-          <img src="befach-rice/fields-to-plate1.jpg" alt="From the paddy field — Sona Masoori, hand-harvested">
-
+        <div class="ss-step-img">
+          <span class="ss-tag">Origin</span>
+          <img src="befach-rice/fields-to-plate.jpg" alt="From the paddy field — Sona Masoori, hand-harvested">
         </div>
         <div class="ss-step-content">
           <div class="ss-num">01</div>
@@ -980,9 +962,9 @@
       </div>
 
       <div class="ss-step reverse rv">
-        <div class="ss-step-img" style="aspect-ratio:1/1">
-          <span class="ss-tag" style="left:auto;right:18px">Engineered</span>
-          <img src="befach-rice/wellness-grain1.jpg" alt="Every grain considered — high amylose, slow-release starch">
+        <div class="ss-step-img">
+          <span class="ss-tag">Engineered</span>
+          <img src="befach-rice/wellness-grain.jpg" alt="Every grain considered — high amylose, slow-release starch">
         </div>
         <div class="ss-step-content">
           <div class="ss-num">02</div>
@@ -992,9 +974,9 @@
       </div>
 
       <div class="ss-step rv">
-        <div class="ss-step-img" style="aspect-ratio:1/1">
-          <span class="ss-tag" style="left:auto;right:18px">Into your kitchen</span>
-          <img src="befach-rice/kitchen-bowl1.jpg" alt="Cooked Sona Masoori rice with the Befach pack in a kitchen">
+        <div class="ss-step-img">
+          <span class="ss-tag">Into your kitchen</span>
+          <img src="befach-rice/kitchen-bowl.jpg" alt="Cooked Sona Masoori rice with the Befach pack in a kitchen">
         </div>
         <div class="ss-step-content">
           <div class="ss-num">03</div>
@@ -1004,9 +986,9 @@
       </div>
 
       <div class="ss-step reverse rv">
-        <div class="ss-step-img" style="aspect-ratio:1/1">
-          <span class="ss-tag" style="left:auto;right:18px">Delivered</span>
-          <img src="befach-rice/hand-pack1.jpg" alt="Befach Diet & Diabetic Rice pack delivered to your hand">
+        <div class="ss-step-img">
+          <span class="ss-tag">Delivered</span>
+          <img src="befach-rice/hand-pack.jpg" alt="Befach Diet & Diabetic Rice pack delivered to your hand">
         </div>
         <div class="ss-step-content">
           <div class="ss-num">04</div>
@@ -1030,11 +1012,21 @@
     <div class="sim-card rv">
       <div class="sim-side">
         <span class="eyebrow">Glucose Response Simulator</span>
-        <h3>Same plate. Two very different curves.</h3>
-        <p>Post-meal blood glucose over 5 hours, modeled from UniQ Nutri Bio-Sciences lab data (ISO 26642:2010). No clicks needed — scroll the charts into view and both draw themselves, side by side.</p>
+        <h3>Pick what's on the plate</h3>
+        <p>Post-meal blood glucose over 5 hours. Curves modeled from UniQ Nutri Bio-Sciences lab data (ISO 26642:2010).</p>
+        <div class="sim-toggle">
+          <button class="regular on" data-type="regular" onclick="setRice('regular')">
+            <span class="sw"></span>
+            <span>Regular white rice<br><small style="opacity:.7;font-weight:500">GI ~73 · peak 180 mg/dL @ 60min</small></span>
+          </button>
+          <button class="befach" data-type="befach" onclick="setRice('befach')">
+            <span class="sw"></span>
+            <span>Befach Diet &amp; Diabetic Rice<br><small style="opacity:.7;font-weight:500">GI 50 · peak 145 mg/dL @ 90min</small></span>
+          </button>
+        </div>
         <div class="sim-readout">
-          <div class="big" style="color:var(--gold)">35 <span>mg/dL lower peak</span></div>
-          <small>Befach peaks at just 145 mg/dL vs 180 for regular white rice — and settles back faster.</small>
+          <div class="big" id="peakVal">180 <span>mg/dL peak</span></div>
+          <small id="peakNote">Sharp spike ~60 min after eating</small>
         </div>
         <div class="sim-meta">
           Source: <b>UniQ Nutri Bio-Sciences LLP</b>, Report No. UNBS/26-27-526. Mean of n=10 healthy human subjects. Method: ISO 26642:2010.
@@ -1043,23 +1035,29 @@
       <div class="sim-chart">
         <div class="ctitle">
           <h4>Blood glucose · post-meal (5 hours)</h4>
-          <span>Auto-plays as you scroll · mg/dL</span>
+          <span id="simLabel">Showing: Regular white rice</span>
         </div>
-        <div class="sim-duo">
-          <figure class="mini">
-            <figcaption><i style="background:#9B6B4C"></i>Regular white rice<b>GI ~73</b></figcaption>
-            <svg id="chartRegular" class="mini-svg" viewBox="0 0 540 180" width="100%" role="img" aria-label="Blood glucose response for regular white rice over 5 hours"></svg>
-          </figure>
-          <figure class="mini">
-            <figcaption><i style="background:#E66E1E"></i>Befach Diet &amp; Diabetic Rice<b>GI 50</b></figcaption>
-            <svg id="chartBefach" class="mini-svg" viewBox="0 0 540 180" width="100%" role="img" aria-label="Blood glucose response for Befach Diet and Diabetic Rice over 5 hours"></svg>
-          </figure>
-        </div>
+        <svg id="glChart" viewBox="0 0 560 300" width="100%" role="img" aria-label="Blood glucose response curve over 5 hours">
+          <g class="grid" id="gridLines"></g>
+          <line class="axis" x1="48" y1="20" x2="48" y2="252"/>
+          <line class="axis" x1="48" y1="252" x2="540" y2="252"/>
+          <g id="yLabels" font-family="Hanken Grotesk" font-size="11" fill="#7A6B5C"></g>
+          <g id="xLabels" font-family="Hanken Grotesk" font-size="11" fill="#7A6B5C"></g>
+          <rect x="48" y="170" width="492" height="52" fill="#F0B963" opacity="0.18"/>
+          <text x="54" y="164" font-family="Hanken Grotesk" font-size="10" fill="#C5560F" font-weight="700">healthy range 70–140 mg/dL</text>
+          <path id="curve" fill="none" stroke="#9B6B4C" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path id="curveFill" fill="#9B6B4C" opacity="0.10"/>
+          <circle id="dot" r="6.5" fill="#9B6B4C" stroke="#fff" stroke-width="2.5" cx="48" cy="230"/>
+          <text id="dotLabel" font-family="Fraunces" font-size="15" font-weight="700" fill="#C5560F" text-anchor="middle"></text>
+        </svg>
         <div class="legend">
-          <span><i style="background:#9B6B4C"></i>Regular</span>
-          <span><i style="background:#E66E1E"></i>Befach</span>
+          <span><i style="background:#9B6B4C" id="legSwatch"></i><span id="legText">Regular white rice</span></span>
           <span><i style="background:#F0B963;opacity:.5"></i>Healthy range (70–140 mg/dL)</span>
         </div>
+        <button class="replay magnetic" onclick="animateCurve()">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.5 9a9 9 0 0 1 14.8-3.4L23 10M1 14l4.7 4.4A9 9 0 0 0 20.5 15"/></svg>
+          Replay animation
+        </button>
       </div>
     </div>
   </div>
@@ -1338,30 +1336,30 @@
       <h2>From paddy field to your plate</h2>
     </div>
     <div class="bento-grid">
-      <div class="bcell b1 rv lb-trigger" data-img="befach-rice/benefits1.jpg">
-        <img src="befach-rice/benefits1.jpg" alt="Benefits of diabetic rice">
-        <span class="btag">Benefits</span>
-        <span class="blabel">Whole family. Low sugar. Daily use.</span>
-      </div>
-      <div class="bcell b2 rv lb-trigger" data-img="befach-rice/fields-to-plate1.jpg" style="transition-delay:.08s">
-        <img src="befach-rice/fields-to-plate1.jpg" alt="From fields to your plate">
+      <div class="bcell b1 rv lb-trigger" data-img="befach-rice/fields-to-plate.jpg">
+        <img src="befach-rice/fields-to-plate.jpg" alt="From fields to your plate">
         <span class="btag">Origin</span>
         <span class="blabel">From the field, by hand — premium aged paddy</span>
       </div>
-      <div class="bcell b4 rv lb-trigger" data-img="befach-rice/wellness-grain1.jpg" style="transition-delay:.16s">
-        <img src="befach-rice/wellness-grain1.jpg" alt="Wellness begins with every grain">
-        <span class="btag">Wellness</span>
-        <span class="blabel">Wellness begins with every grain</span>
-      </div>
-      <div class="bcell b3 rv lb-trigger" data-img="befach-rice/kitchen-bowl1.jpg" style="transition-delay:.24s">
-        <img src="befach-rice/kitchen-bowl1.jpg" alt="Befach low sugar rice in a kitchen">
+      <div class="bcell b2 rv lb-trigger" data-img="befach-rice/kitchen-bowl.jpg" style="transition-delay:.08s">
+        <img src="befach-rice/kitchen-bowl.jpg" alt="Befach low sugar rice in a kitchen">
         <span class="btag">Daily use</span>
         <span class="blabel">Suitable for the whole family</span>
       </div>
-      <div class="bcell b5 rv lb-trigger" data-img="befach-rice/hand-pack1.jpg" style="transition-delay:.32s">
-        <img src="befach-rice/hand-pack1.jpg" alt="Befach diabetic rice pack in hand">
+      <div class="bcell b3 rv lb-trigger" data-img="befach-rice/wellness-grain.jpg" style="transition-delay:.16s">
+        <img src="befach-rice/wellness-grain.jpg" alt="Wellness begins with every grain">
+        <span class="btag">Wellness</span>
+        <span class="blabel">Wellness begins with every grain</span>
+      </div>
+      <div class="bcell b4 rv lb-trigger" data-img="befach-rice/hand-pack.jpg" style="transition-delay:.24s">
+        <img src="befach-rice/hand-pack.jpg" alt="Befach diabetic rice pack in hand">
         <span class="btag">Best-seller</span>
         <span class="blabel">From fields to your plate</span>
+      </div>
+      <div class="bcell b5 rv lb-trigger" data-img="befach-rice/benefits.jpg" style="transition-delay:.32s">
+        <img src="befach-rice/benefits.jpg" alt="Benefits of diabetic rice">
+        <span class="btag">Benefits</span>
+        <span class="blabel">Whole family. Low sugar. Daily use.</span>
       </div>
     </div>
   </div>
@@ -1377,9 +1375,9 @@
     </div>
 
     <div class="plans plans-2">
-      <div class="plan feat rv">
+      <div class="plan feat rv sel">
         <span class="tag">Best value</span>
-        <div class="plan-thumb"><img src="befach-rice/pack-front1.jpg" alt="Befach Diet & Diabetic White Rice 4.5 kg pack"></div>
+        <a href="product.html" class="plan-thumb" aria-label="View 4.5 KG Pack details"><img src="befach-rice/pack-front.jpg" alt="Befach Diet & Diabetic White Rice 4.5 kg pack"></a>
         <div class="plan-body">
           <h3>4.5 KG Pack</h3>
           <p class="sub">The monthly staple. Best ₹/kg.</p>
@@ -1391,12 +1389,12 @@
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Cash on delivery available</li>
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Lab GI report sent on request</li>
           </ul>
-          <a href="#" class="btn btn-primary magnetic">Add 4.5 kg pack to cart</a>
+          <a href="#" class="btn btn-primary magnetic add-cart" data-name="4.5 KG Pack" data-price="600" data-img="befach-rice/pack-front.jpg">Add 4.5 kg pack to cart</a>
         </div>
       </div>
 
       <div class="plan rv" style="transition-delay:.1s">
-        <div class="plan-thumb"><img src="befach-rice/pack-1kg.png" alt="Befach Diet & Diabetic White Rice 1 kg pack of 2"></div>
+        <a href="product.html" class="plan-thumb" aria-label="View 1 KG Pack of 2 details"><img src="befach-rice/pack-1kg.png" alt="Befach Diet & Diabetic White Rice 1 kg pack of 2"></a>
         <div class="plan-body">
           <h3>1 KG · Pack of 2</h3>
           <p class="sub">Try-before-you-stock. Two 1 kg bags.</p>
@@ -1408,7 +1406,7 @@
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Free pan-India shipping</li>
             <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Cash on delivery available</li>
           </ul>
-          <a href="#" class="btn btn-ghost magnetic">Add 2 × 1 kg to cart</a>
+          <a href="#" class="btn btn-ghost magnetic add-cart" data-name="1 KG · Pack of 2" data-price="280" data-img="befach-rice/pack-1kg.png">Add 2 × 1 kg to cart</a>
         </div>
       </div>
     </div>
@@ -1609,21 +1607,21 @@
 <!-- CREATIVE MARQUEE -->
 <section class="creative-strip">
   <div class="cs-track">
-    <div class="cs-card lb-trigger" data-img="befach-rice/fields-to-plate.jpg"><img src="befach-rice/fields-to-plate1.jpg" alt="From the fields"></div>
-    <div class="cs-card lb-trigger" data-img="befach-rice/wellness-grain.jpg"><img src="befach-rice/wellness-grain1.jpg" alt="Wellness in every grain"></div>
-    <div class="cs-card lb-trigger" data-img="befach-rice/benefits.jpg"><img src="befach-rice/benefits1.jpg" alt="Benefits of diabetic rice"></div>
-    <div class="cs-card lb-trigger" data-img="befach-rice/kitchen-bowl.jpg"><img src="befach-rice/kitchen-bowl1.jpg" alt="Low sugar rice in the kitchen"></div>     
-    <div class="cs-card lb-trigger" data-img="befach-rice/hand-pack.jpg"><img src="befach-rice/hand-pack1.jpg" alt="From fields to your plate"></div>
-    <div class="cs-card lb-trigger" data-img="befach-rice/bestseller.jpg"><img src="befach-rice/bestseller1.jpg" alt="Your next bestseller"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/bestseller.jpg"><img src="befach-rice/bestseller.jpg" alt="Your next bestseller"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/kitchen-bowl.jpg"><img src="befach-rice/kitchen-bowl.jpg" alt="Low sugar rice in the kitchen"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/fields-to-plate.jpg"><img src="befach-rice/fields-to-plate.jpg" alt="From the fields"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/wellness-grain.jpg"><img src="befach-rice/wellness-grain.jpg" alt="Wellness in every grain"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/benefits.jpg"><img src="befach-rice/benefits.jpg" alt="Benefits of diabetic rice"></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/hand-pack.jpg"><img src="befach-rice/hand-pack.jpg" alt="From fields to your plate"></div>
     <div class="cs-card lb-trigger" data-img="befach-rice/weight-management.png"><img src="befach-rice/weight-management.png" alt="Weight management"></div>
     <div class="cs-card lb-trigger" data-img="befach-rice/glucometer.png"><img src="befach-rice/glucometer.png" alt="Control diabetes"></div>
     <div class="cs-card lb-trigger" data-img="befach-rice/pack-paddy.png"><img src="befach-rice/pack-paddy.png" alt="Pack with paddy"></div>
     <div class="cs-card lb-trigger" data-img="befach-rice/benefits-wheel.png"><img src="befach-rice/benefits-wheel.png" alt="Benefits wheel"></div>
     <!-- dupe -->
-    <div class="cs-card lb-trigger" data-img="befach-rice/fields-to-plate.jpg"><img src="befach-rice/fields-to-plate1.jpg" alt=""></div>
-    <div class="cs-card lb-trigger" data-img="befach-rice/wellness-grain.jpg"><img src="befach-rice/wellness-grain1.jpg" alt=""></div>
-    <div class="cs-card lb-trigger" data-img="befach-rice/kitchen-bowl.jpg"><img src="befach-rice/kitchen-bowl1.jpg" alt=""></div> 
-    <div class="cs-card lb-trigger" data-img="befach-rice/bestseller.jpg"><img src="befach-rice/bestseller1.jpg" alt=""></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/bestseller.jpg"><img src="befach-rice/bestseller.jpg" alt=""></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/kitchen-bowl.jpg"><img src="befach-rice/kitchen-bowl.jpg" alt=""></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/fields-to-plate.jpg"><img src="befach-rice/fields-to-plate.jpg" alt=""></div>
+    <div class="cs-card lb-trigger" data-img="befach-rice/wellness-grain.jpg"><img src="befach-rice/wellness-grain.jpg" alt=""></div>
     <div class="cs-card lb-trigger" data-img="befach-rice/weight-management.png"><img src="befach-rice/weight-management.png" alt=""></div>
   </div>
 </section>
@@ -1680,10 +1678,10 @@
           <button type="submit" class="magnetic">Subscribe</button>
         </form>
         <div class="foot-soc">
-          <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4z"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
+          <a href="https://www.instagram.com/befach_foods" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.4A4 4 0 1 1 12.6 8 4 4 0 0 1 16 11.4z"/><circle cx="17.5" cy="6.5" r=".5" fill="currentColor"/></svg></a>
           <a href="#" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.5-4.5-10-10-10S2 6.5 2 12c0 5 3.66 9.13 8.44 9.88V14.9H7.9V12h2.54V9.8c0-2.5 1.5-3.9 3.78-3.9 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.9h-2.33v6.97C18.34 21.13 22 17 22 12z"/></svg></a>
-          <a href="#" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2s-.2-1.6-.9-2.3c-.8-.9-1.7-.9-2.2-1C16.5 3.6 12 3.6 12 3.6s-4.5 0-7.9.3c-.5.1-1.4.1-2.2 1C1.2 5.6 1 7.2 1 7.2S.8 9 .8 10.9v1.7C.8 14.5 1 16.3 1 16.3s.2 1.6.9 2.3c.8.9 2 .9 2.5 1 1.8.2 7.6.3 7.6.3s4.5 0 7.9-.3c.5-.1 1.4-.1 2.2-1 .7-.7.9-2.3.9-2.3s.2-1.8.2-3.7v-1.7C23.2 9 23 7.2 23 7.2zM9.7 14.6V8.5l5.8 3.1-5.8 3z"/></svg></a>
-          <a href="#" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.9c0 2.1.55 4.05 1.6 5.8L2 22l4.45-1.17a9.9 9.9 0 0 0 5.59 1.6h.01c5.46 0 9.9-4.45 9.9-9.9C21.95 6.45 17.5 2 12.04 2z"/></svg></a>
+          <a href="https://youtu.be/xi8eNk_olrE" target="_blank" rel="noopener" aria-label="YouTube"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2s-.2-1.6-.9-2.3c-.8-.9-1.7-.9-2.2-1C16.5 3.6 12 3.6 12 3.6s-4.5 0-7.9.3c-.5.1-1.4.1-2.2 1C1.2 5.6 1 7.2 1 7.2S.8 9 .8 10.9v1.7C.8 14.5 1 16.3 1 16.3s.2 1.6.9 2.3c.8.9 2 .9 2.5 1 1.8.2 7.6.3 7.6.3s4.5 0 7.9-.3c.5-.1 1.4-.1 2.2-1 .7-.7.9-2.3.9-2.3s.2-1.8.2-3.7v-1.7C23.2 9 23 7.2 23 7.2zM9.7 14.6V8.5l5.8 3.1-5.8 3z"/></svg></a>
+          <a href="https://wa.me/918760209090" target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.9c0 2.1.55 4.05 1.6 5.8L2 22l4.45-1.17a9.9 9.9 0 0 0 5.59 1.6h.01c5.46 0 9.9-4.45 9.9-9.9C21.95 6.45 17.5 2 12.04 2z"/></svg></a>
         </div>
       </div>
       <div><h4>Shop</h4><a href="#shop">4.5 kg pack · ₹600</a><a href="#shop">1 kg × 2 pack · ₹280</a><a href="#quiz">Find your pack</a><a href="#reports">Lab reports</a></div>
@@ -1696,6 +1694,29 @@
     </div>
   </div>
 </footer>
+
+<!-- CART DRAWER -->
+<div class="cart-backdrop" id="cartBackdrop"></div>
+<aside class="cart-drawer" id="cartDrawer" aria-label="Shopping cart" aria-hidden="true">
+  <div class="cart-head">
+    <h3>Your cart</h3>
+    <button class="cart-close" id="cartClose" aria-label="Close cart">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot">
+    <div class="cart-total"><span>Total</span><b id="cartTotal">₹0</b></div>
+    <a class="btn btn-primary" id="cartCheckout" href="#" target="_blank" rel="noopener">Checkout on WhatsApp</a>
+    <div class="cart-note">Free pan-India shipping · Cash on delivery available</div>
+  </div>
+</aside>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+  <span id="toastMsg">Added to cart</span>
+</div>
 
 <!-- STICKY ADD TO CART -->
 <div class="stickybar" id="stickybar">
@@ -1817,6 +1838,17 @@ const countObs = new IntersectionObserver((es)=>{
 document.querySelectorAll('[data-count]').forEach(el=>countObs.observe(el));
 
 /* shop billing toggle removed — SKU selection is now a flat 2-card grid */
+/* pick-your-pack: highlight whichever plan the user clicks */
+(function(){
+  const plans = document.querySelectorAll('.plans-2 .plan');
+  plans.forEach(p=>{
+    p.addEventListener('click', ()=>{
+      // highlight the clicked card; buttons/links inside still run their own actions
+      plans.forEach(x=> x.classList.remove('sel'));
+      p.classList.add('sel');
+    });
+  });
+})();
 
 /* lightbox */
 (function(){
@@ -1836,12 +1868,36 @@ document.querySelectorAll('[data-count]').forEach(el=>countObs.observe(el));
   document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
 })();
 
-/* simulator — two side-by-side charts, auto-play on scroll (real data from UniQ report) */
+/* simulator (5 hour curves — real data from UniQ report) */
+const PAD_L=48, PAD_R=540, TOP=20, BOT=252;
+const xMin=0, xMax=300;
+const yMin=70, yMax=210;
+function X(m){ return PAD_L + (m-xMin)/(xMax-xMin)*(PAD_R-PAD_L); }
+function Y(v){ return BOT - (v-yMin)/(yMax-yMin)*(BOT-TOP); }
+(function setupGrid(){
+  const g=document.getElementById('gridLines');
+  const yl=document.getElementById('yLabels');
+  const xl=document.getElementById('xLabels');
+  [70,100,140,170,210].forEach(v=>{
+    const y=Y(v);
+    g.innerHTML+=`<line x1="${PAD_L}" y1="${y}" x2="${PAD_R}" y2="${y}"/>`;
+    yl.innerHTML+=`<text x="${PAD_L-10}" y="${y+4}" text-anchor="end">${v}</text>`;
+  });
+  [0,60,120,180,240,300].forEach(m=>{
+    const x=X(m);
+    xl.innerHTML+=`<text x="${x}" y="270" text-anchor="middle">${m===0?'0':m+'m'}</text>`;
+  });
+})();
+/* real data points from UniQ report, mg/dL */
 const POINTS = {
   regular:[ [0,100],[60,180],[120,155],[180,140],[240,120],[300,100] ],
   befach :[ [0,100],[60,135],[90,145],[100,130],[180,105],[240,90],[300,90] ]
 };
-const COLORS = { regular:'#9B6B4C', befach:'#E66E1E' };
+const META = {
+  regular:{ color:'#9B6B4C', peak:180, peakTime:60, label:'Regular white rice', note:'Sharp spike — peak 180 mg/dL at 60 min' },
+  befach :{ color:'#E66E1E', peak:145, peakTime:90, label:'Befach Diet & Diabetic Rice', note:'Gentle rise — peak 145 mg/dL at 90 min, then settles' }
+};
+let current='regular';
 function interp(pts, m){
   for(let i=0;i<pts.length-1;i++){
     if(m>=pts[i][0] && m<=pts[i+1][0]){
@@ -1851,68 +1907,61 @@ function interp(pts, m){
   }
   return pts[pts.length-1][1];
 }
-function setupMiniChart(svg, type){
-  const L=40, R=528, T=12, B=150, xMax=300, yMin=70, yMax=210;
-  const X = m => L + m/xMax*(R-L);
-  const Y = v => B - (v-yMin)/(yMax-yMin)*(B-T);
-  const color = COLORS[type], pts = POINTS[type];
-  let grid='', yl='', xl='';
-  [70,140,210].forEach(v=>{
-    const y=Y(v);
-    grid += `<line x1="${L}" y1="${y}" x2="${R}" y2="${y}"/>`;
-    yl   += `<text x="${L-7}" y="${y+3}" text-anchor="end">${v}</text>`;
-  });
-  [0,60,120,180,240,300].forEach(m=>{
-    xl += `<text x="${X(m)}" y="${B+20}" text-anchor="middle">${m===0?'0':m/60+'h'}</text>`;
-  });
-  const bandTop=Y(140), bandH=Y(70)-Y(140);
-  svg.innerHTML = `
-    <g class="grid">${grid}</g>
-    <rect x="${L}" y="${bandTop}" width="${R-L}" height="${bandH}" fill="#F0B963" opacity="0.18"/>
-    <line class="axis" x1="${L}" y1="${T}" x2="${L}" y2="${B}"/>
-    <line class="axis" x1="${L}" y1="${B}" x2="${R}" y2="${B}"/>
-    <g font-family="Hanken Grotesk" font-size="9" fill="#7A6B5C">${yl}</g>
-    <g font-family="Hanken Grotesk" font-size="9" fill="#7A6B5C">${xl}</g>
-    <path class="cfill" fill="${color}" opacity="0.10"/>
-    <path class="cline" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle class="cdot" r="5" fill="${color}" stroke="#fff" stroke-width="2"/>
-    <text class="clab" font-family="Fraunces" font-size="12" font-weight="700" fill="${color}" text-anchor="middle"></text>`;
-  const line=svg.querySelector('.cline'), fill=svg.querySelector('.cfill'),
-        dot=svg.querySelector('.cdot'), lab=svg.querySelector('.clab');
-  function pathFor(upto){
-    let d='';
-    for(let m=0;m<=upto;m+=4){
-      const x=X(m), y=Y(interp(pts,m));
-      d += (m===0?`M${x},${y}`:` L${x},${y}`);
-    }
-    return { d, f: d + ` L${X(upto)},${B} L${X(0)},${B} Z` };
+function pathFor(type, upto){
+  const pts = POINTS[type];
+  const end = upto===undefined? xMax : upto;
+  let d='';
+  for(let m=0;m<=end;m+=4){
+    const x=X(m), y=Y(interp(pts,m));
+    d += (m===0?`M${x},${y}`:` L${x},${y}`);
   }
-  let timer=null;
-  function animate(){
-    clearInterval(timer);
-    let m=0;
-    timer=setInterval(()=>{
-      m+=5;
-      if(m>=xMax){ m=xMax; clearInterval(timer); }
-      const p=pathFor(m);
-      line.setAttribute('d',p.d); fill.setAttribute('d',p.f);
-      const v=interp(pts,m), x=X(m), y=Y(v);
-      dot.setAttribute('cx',x); dot.setAttribute('cy',y);
-      lab.setAttribute('x', Math.max(L+16, Math.min(x, R-16)));
-      lab.setAttribute('y', y-9);
-      lab.textContent = Math.round(v)+' mg/dL';
-    },14);
-  }
-  return { animate };
+  const lastX=X(end);
+  const f = d + ` L${lastX},${BOT} L${X(0)},${BOT} Z`;
+  return {d,f};
 }
-const chartR = setupMiniChart(document.getElementById('chartRegular'), 'regular');
-const chartB = setupMiniChart(document.getElementById('chartBefach'), 'befach');
-function animateBoth(){ chartR.animate(); chartB.animate(); }
-/* re-animate each time the simulator scrolls back into view (up or down) */
+let animTimer=null;
+function animateCurve(){
+  const meta=META[current];
+  const curve=document.getElementById('curve');
+  const fill=document.getElementById('curveFill');
+  const dot=document.getElementById('dot');
+  const dotLabel=document.getElementById('dotLabel');
+  curve.setAttribute('stroke',meta.color);
+  fill.setAttribute('fill',meta.color);
+  dot.setAttribute('fill',meta.color);
+  clearInterval(animTimer);
+  let m=0;
+  animTimer=setInterval(()=>{
+    m+=5;
+    if(m>=xMax){ m=xMax; clearInterval(animTimer); }
+    const p=pathFor(current,m);
+    curve.setAttribute('d',p.d);
+    fill.setAttribute('d',p.f);
+    const v=interp(POINTS[current],m);
+    const x=X(m), y=Y(v);
+    dot.setAttribute('cx',x); dot.setAttribute('cy',y);
+    dotLabel.setAttribute('x', Math.min(x,520));
+    dotLabel.setAttribute('y', y-14);
+    dotLabel.textContent = Math.round(v)+' mg/dL';
+  },14);
+}
+function setRice(type){
+  current=type;
+  document.querySelectorAll('.sim-toggle button').forEach(b=>{
+    b.classList.toggle('on', b.dataset.type===type);
+  });
+  const meta=META[type];
+  document.getElementById('simLabel').textContent='Showing: '+meta.label;
+  document.getElementById('peakVal').innerHTML = meta.peak+' <span>mg/dL peak</span>';
+  document.getElementById('peakNote').textContent = meta.note;
+  document.getElementById('legSwatch').style.background=meta.color;
+  document.getElementById('legText').textContent=meta.label;
+  animateCurve();
+}
 const simObs=new IntersectionObserver((es)=>{
-  es.forEach(e=>{ if(e.isIntersecting) animateBoth(); });
+  es.forEach(e=>{ if(e.isIntersecting){ animateCurve(); simObs.disconnect(); } });
 },{threshold:.3});
-simObs.observe(document.getElementById('sim'));
+simObs.observe(document.getElementById('glChart'));
 
 /* quiz */
 let qStep=0; const qAns=[];
@@ -1964,6 +2013,115 @@ function quizReset(){
   document.querySelector('.quiz-step[data-step="0"]').classList.add('on');
   document.getElementById('qbar').style.width='33%';
 }
+
+/* ===== CART (shared with product.html via localStorage) ===== */
+(function(){
+  const CART_KEY = 'befach_cart';
+  const WA_NUMBER = '918760209090';
+  const $ = id => document.getElementById(id);
+  const fmt = n => '₹' + n.toLocaleString('en-IN');
+  const FALLBACK_IMG = { '4.5 KG Pack':'befach-rice/pack-front.jpg', '1 KG · Pack of 2':'befach-rice/pack-1kg.png' };
+
+  let cart = load();
+  function load(){ try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch(e){ return []; } }
+  function save(){ try { localStorage.setItem(CART_KEY, JSON.stringify(cart)); } catch(e){} }
+  const count = () => cart.reduce((n,i)=> n + i.qty, 0);
+  const total = () => cart.reduce((s,i)=> s + i.price*i.qty, 0);
+
+  function addItem(name, price, img){
+    const ex = cart.find(i=> i.name===name);
+    if(ex){ ex.qty++; } else { cart.push({ name, price, img, qty:1 }); }
+    save(); render(); badge();
+    toast(`${name} added to cart`);
+  }
+  function changeQty(name, d){
+    const it = cart.find(i=> i.name===name);
+    if(!it) return;
+    it.qty += d;
+    if(it.qty < 1) cart = cart.filter(i=> i.name!==name);
+    save(); render(); badge();
+  }
+  function removeItem(name){ cart = cart.filter(i=> i.name!==name); save(); render(); badge(); }
+
+  function badge(){
+    const b = $('cartBadge'); if(!b) return;
+    const c = count();
+    b.textContent = c;
+    b.classList.toggle('show', c>0);
+  }
+
+  function render(){
+    const wrap = $('cartItems'); if(!wrap) return;
+    if(!cart.length){
+      wrap.innerHTML = '<div class="cart-empty">Your cart is empty.<br>Add a pack to get started.</div>';
+    } else {
+      wrap.innerHTML = cart.map(i=>`
+        <div class="citem">
+          <img src="${i.img || FALLBACK_IMG[i.name] || 'befach-rice/pack-front.jpg'}" alt="${i.name}">
+          <div class="ci-info">
+            <div class="ci-name">${i.name}</div>
+            <div class="ci-price">${fmt(i.price)} each</div>
+            <div class="ci-qty">
+              <button type="button" data-act="dec" data-name="${i.name}" aria-label="Decrease quantity">−</button>
+              <span class="ci-qnum">${i.qty}</span>
+              <button type="button" data-act="inc" data-name="${i.name}" aria-label="Increase quantity">+</button>
+              <button type="button" class="ci-remove" data-act="rm" data-name="${i.name}">Remove</button>
+            </div>
+          </div>
+          <b>${fmt(i.price*i.qty)}</b>
+        </div>`).join('');
+    }
+    $('cartTotal').textContent = fmt(total());
+    const link = $('cartCheckout');
+    if(cart.length){
+      const lines = cart.map(i=> `${i.qty} × ${i.name} (${fmt(i.price)} each)`).join('\n');
+      const msg = `Hi Befach! I'd like to order:\n${lines}\nTotal: ${fmt(total())}`;
+      link.href = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+      link.style.opacity = '1'; link.style.pointerEvents = 'auto';
+    } else {
+      link.href = `https://wa.me/${WA_NUMBER}`;
+      link.style.opacity = '.5'; link.style.pointerEvents = 'none';
+    }
+  }
+
+  function open(){ render(); $('cartDrawer').classList.add('on'); $('cartBackdrop').classList.add('on'); $('cartDrawer').setAttribute('aria-hidden','false'); }
+  function close(){ $('cartDrawer').classList.remove('on'); $('cartBackdrop').classList.remove('on'); $('cartDrawer').setAttribute('aria-hidden','true'); }
+
+  let tt;
+  function toast(msg){
+    const t = $('toast'); if(!t) return;
+    $('toastMsg').textContent = msg;
+    t.classList.add('show'); clearTimeout(tt);
+    tt = setTimeout(()=> t.classList.remove('show'), 2400);
+  }
+
+  /* wire up */
+  $('cartPill').addEventListener('click', e=>{ e.preventDefault(); open(); });
+  $('cartClose').addEventListener('click', close);
+  $('cartBackdrop').addEventListener('click', close);
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape') close(); });
+
+  $('cartItems').addEventListener('click', e=>{
+    const btn = e.target.closest('button[data-act]'); if(!btn) return;
+    const name = btn.dataset.name, act = btn.dataset.act;
+    if(act==='inc') changeQty(name, 1);
+    else if(act==='dec') changeQty(name, -1);
+    else if(act==='rm') removeItem(name);
+  });
+
+  document.querySelectorAll('.add-cart').forEach(b=>{
+    b.addEventListener('click', e=>{
+      e.preventDefault();
+      addItem(b.dataset.name, parseInt(b.dataset.price,10), b.dataset.img);
+      open();
+    });
+  });
+
+  /* keep badge in sync if cart changes in another tab/page */
+  window.addEventListener('storage', e=>{ if(e.key===CART_KEY){ cart = load(); render(); badge(); } });
+
+  badge(); render();
+})();
 </script>
 </body>
 </html>

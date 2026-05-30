@@ -276,6 +276,8 @@
   .sim-chart .ctitle h4{font-size:1.05rem;color:var(--cocoa-dk)}
   .sim-chart .ctitle span{font-size:.78rem;color:var(--ink-soft);font-weight:600}
   .sim-duo{display:grid;grid-template-columns:1fr;gap:18px;margin-top:6px}
+  .sim-single{margin-top:6px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px 14px 10px}
+  .combo-svg{display:block}
   .mini{margin:0;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 12px 8px}
   .mini figcaption{display:flex;align-items:center;gap:7px;font-size:.82rem;font-weight:700;color:var(--cocoa-dk);margin-bottom:4px;line-height:1.2}
   .mini figcaption i{width:11px;height:11px;border-radius:50%;flex-shrink:0}
@@ -394,18 +396,19 @@
   .awcard small{font-size:.7rem;color:var(--ink-soft);letter-spacing:.04em}
 
   /* global */
-  .global{background:linear-gradient(160deg,var(--orange) 0%,var(--orange-dk) 100%);color:#fff;position:relative;overflow:hidden}
-  .global::before,.global::after{content:"";position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
-  .global::before{width:480px;height:480px;background:radial-gradient(circle,rgba(255,255,255,.16),transparent 70%);top:-160px;right:-100px}
-  .global::after{width:380px;height:380px;background:radial-gradient(circle,rgba(255,255,255,.12),transparent 70%);bottom:-140px;left:-80px}
+  .global{background:linear-gradient(155deg,var(--cocoa-dk) 0%,var(--cocoa) 46%,var(--orange-deep) 100%);color:#fff;position:relative;overflow:hidden}
+  .global::before,.global::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+  .global::before{width:520px;height:520px;background:radial-gradient(circle,rgba(224,164,88,.30),transparent 70%);top:-180px;right:-120px}
+  .global::after{width:420px;height:420px;background:radial-gradient(circle,rgba(232,119,46,.28),transparent 70%);bottom:-160px;left:-90px}
   .global-wrap{position:relative;z-index:1;text-align:center}
   .global .shead h2,.global .shead p{color:#fff}
   .global .eyebrow{color:var(--cream)}
   .global .shead p{color:rgba(255,255,255,.85)}
   .flag-row{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-top:40px}
   .flag{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:80px}
-  .flag .fg{width:64px;height:42px;border-radius:8px;background:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-weight:800;color:var(--orange-dk);box-shadow:var(--shadow-sm);overflow:hidden;font-size:.84rem}
-  .flag b{font-size:.94rem;font-weight:700}
+  .flag .fg{width:80px;height:54px;border-radius:10px;object-fit:cover;display:block;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.25);box-shadow:var(--shadow-sm);overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}
+  .flag:hover .fg{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,0,0,.28)}
+  .flag b{font-size:.94rem;font-weight:700;color:#fff}
 
   /* shop */
   #shop{background:linear-gradient(180deg,var(--cream),var(--paper))}
@@ -799,7 +802,7 @@
     <div><b data-count="50">50</b><span>GI · Lab-Certified Low</span></div>
     <div><b data-count="10" data-suffix=" Lakh+">10 Lakh+</b><span>Households served</span></div>
     <div><b data-count="7" data-suffix=" yrs">7 yrs</b><span>Of trust</span></div>
-    <div><b data-count="5" data-suffix=" countries">5 countries</b><span>Global exports</span></div>
+    <div><b data-count="6" data-suffix=" countries">6 countries</b><span>Global exports</span></div>
     <div><b data-count="28" data-suffix=".33%">28.33%</b><span>Amylose · slow-release</span></div>
   </div>
 </section>
@@ -972,7 +975,7 @@
         <div class="ss-step-content">
           <div class="ss-num">04</div>
           <h3>From fields, to your plate</h3>
-          <p>Delivered pan-India and exported to Iran, USA, Mauritius, Kuwait, Brazil. Cash on delivery available. 10 lakh+ households have already switched. Your turn.</p>
+          <p>Delivered pan-India and exported to UAE, Iran, Kuwait, Mauritius, USA, Ireland. Cash on delivery available. 10 lakh+ households have already switched. Your turn.</p>
         </div>
       </div>
     </div>
@@ -1004,17 +1007,10 @@
       <div class="sim-chart">
         <div class="ctitle">
           <h4>Blood glucose · post-meal (5 hours)</h4>
-          <span>Auto-plays as you scroll · mg/dL</span>
+          <span>Blood sugar · mg/dL</span>
         </div>
-        <div class="sim-duo">
-          <figure class="mini">
-            <figcaption><i style="background:#9B6B4C"></i>Regular white rice<b>GI ~73</b></figcaption>
-            <svg id="chartRegular" class="mini-svg" viewBox="0 0 540 180" width="100%" role="img" aria-label="Blood glucose response for regular white rice over 5 hours"></svg>
-          </figure>
-          <figure class="mini">
-            <figcaption><i style="background:#E66E1E"></i>Befach Diet &amp; Diabetic Rice<b>GI 50</b></figcaption>
-            <svg id="chartBefach" class="mini-svg" viewBox="0 0 540 180" width="100%" role="img" aria-label="Blood glucose response for Befach Diet and Diabetic Rice over 5 hours"></svg>
-          </figure>
+        <div class="sim-single">
+          <svg id="chartCombined" class="combo-svg" viewBox="0 0 540 280" width="100%" role="img" aria-label="Blood glucose response comparison — regular white rice versus Befach Diet and Diabetic Rice over 5 hours"></svg>
         </div>
         <div class="legend">
           <span><i style="background:#9B6B4C"></i>Regular</span>
@@ -1466,14 +1462,15 @@
   <div class="wrap global-wrap">
     <div class="rv">
       <span class="eyebrow">India to the world</span>
-      <h2 style="margin:14px 0 14px">India's pioneer. Now in 5 countries.</h2>
+      <h2 style="margin:14px 0 14px">India's pioneer. Now in 6 countries.</h2>
       <p>Befach is India's largest seller to other low-sugar rice brands. We export Befach Diet &amp; Diabetic Rice to:</p>
       <div class="flag-row">
-        <div class="flag"><div class="fg" style="background:linear-gradient(180deg,#239F40 33%,#fff 33% 66%,#DA0000 66%)">IR</div><b>Iran</b></div>
-        <div class="flag"><div class="fg" style="background:linear-gradient(180deg,#B22234 50%,#fff 50%);color:#3C3B6E">USA</div><b>USA</b></div>
-        <div class="flag"><div class="fg" style="background:linear-gradient(180deg,#EA2839 25%,#1A206D 25% 50%,#FFD500 50% 75%,#00A04D 75%);color:#fff">MU</div><b>Mauritius</b></div>
-        <div class="flag"><div class="fg" style="background:linear-gradient(180deg,#007A3D 33%,#fff 33% 66%,#CE1126 66%);color:#000">KW</div><b>Kuwait</b></div>
-        <div class="flag"><div class="fg" style="background:#009C3B;color:#FFDF00">BR</div><b>Brazil</b></div>
+        <div class="flag"><img class="fg" src="https://flagcdn.com/w160/ae.png" srcset="https://flagcdn.com/w320/ae.png 2x" alt="UAE flag" loading="lazy"><b>UAE</b></div>
+        <div class="flag"><img class="fg" src="https://flagcdn.com/w160/ir.png" srcset="https://flagcdn.com/w320/ir.png 2x" alt="Iran flag" loading="lazy"><b>Iran</b></div>
+        <div class="flag"><img class="fg" src="https://flagcdn.com/w160/kw.png" srcset="https://flagcdn.com/w320/kw.png 2x" alt="Kuwait flag" loading="lazy"><b>Kuwait</b></div>
+        <div class="flag"><img class="fg" src="https://flagcdn.com/w160/mu.png" srcset="https://flagcdn.com/w320/mu.png 2x" alt="Mauritius flag" loading="lazy"><b>Mauritius</b></div>
+        <div class="flag"><img class="fg" src="https://flagcdn.com/w160/us.png" srcset="https://flagcdn.com/w320/us.png 2x" alt="USA flag" loading="lazy"><b>USA</b></div>
+        <div class="flag"><img class="fg" src="https://flagcdn.com/w160/ie.png" srcset="https://flagcdn.com/w320/ie.png 2x" alt="Ireland flag" loading="lazy"><b>Ireland</b></div>
       </div>
     </div>
   </div>
@@ -1797,26 +1794,29 @@ document.querySelectorAll('[data-count]').forEach(el=>countObs.observe(el));
   document.addEventListener('keydown',(e)=>{ if(e.key==='Escape') close(); });
 })();
 
-/* simulator — two side-by-side charts, auto-play on scroll (real data from UniQ report) */
+/* simulator — single chart with two lines, auto-play on scroll (real data from UniQ report) */
 const POINTS = {
-  regular:[ [0,100],[60,180],[120,155],[180,140],[240,120],[300,100] ],
+  regular:[ [0,100],[55,200],[120,170],[180,148],[240,122],[300,100] ],
   befach :[ [0,100],[60,135],[90,145],[100,130],[180,105],[240,90],[300,90] ]
 };
 const COLORS = { regular:'#9B6B4C', befach:'#E66E1E' };
+/* smooth (Catmull-Rom) interpolation — gives rounded curves instead of angular segments */
 function interp(pts, m){
   for(let i=0;i<pts.length-1;i++){
     if(m>=pts[i][0] && m<=pts[i+1][0]){
-      const t = (m-pts[i][0])/(pts[i+1][0]-pts[i][0]);
-      return pts[i][1] + t*(pts[i+1][1]-pts[i][1]);
+      const p0 = pts[i-1] || pts[i], p1 = pts[i], p2 = pts[i+1], p3 = pts[i+2] || pts[i+1];
+      const t = (m-p1[0])/(p2[0]-p1[0]), t2=t*t, t3=t2*t;
+      return 0.5*((2*p1[1]) + (-p0[1]+p2[1])*t
+        + (2*p0[1]-5*p1[1]+4*p2[1]-p3[1])*t2
+        + (-p0[1]+3*p1[1]-3*p2[1]+p3[1])*t3);
     }
   }
   return pts[pts.length-1][1];
 }
-function setupMiniChart(svg, type){
-  const L=40, R=528, T=12, B=150, xMax=300, yMin=70, yMax=210;
+function setupComboChart(svg){
+  const L=42, R=528, T=18, B=232, xMax=300, yMin=70, yMax=210;
   const X = m => L + m/xMax*(R-L);
   const Y = v => B - (v-yMin)/(yMax-yMin)*(B-T);
-  const color = COLORS[type], pts = POINTS[type];
   let grid='', yl='', xl='';
   [70,140,210].forEach(v=>{
     const y=Y(v);
@@ -1827,6 +1827,12 @@ function setupMiniChart(svg, type){
     xl += `<text x="${X(m)}" y="${B+20}" text-anchor="middle">${m===0?'0':m/60+'h'}</text>`;
   });
   const bandTop=Y(140), bandH=Y(70)-Y(140);
+  /* build a series group per type — fill, line, dot, label */
+  const series = type => `
+    <path class="cfill-${type}" fill="${COLORS[type]}" opacity="0.08"/>
+    <path class="cline-${type}" fill="none" stroke="${COLORS[type]}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle class="cdot-${type}" r="5" fill="${COLORS[type]}" stroke="#fff" stroke-width="2"/>
+    <text class="clab-${type}" font-family="Fraunces" font-size="12" font-weight="700" fill="${COLORS[type]}" text-anchor="middle"></text>`;
   svg.innerHTML = `
     <g class="grid">${grid}</g>
     <rect x="${L}" y="${bandTop}" width="${R-L}" height="${bandH}" fill="#F0B963" opacity="0.18"/>
@@ -1834,19 +1840,34 @@ function setupMiniChart(svg, type){
     <line class="axis" x1="${L}" y1="${B}" x2="${R}" y2="${B}"/>
     <g font-family="Hanken Grotesk" font-size="9" fill="#7A6B5C">${yl}</g>
     <g font-family="Hanken Grotesk" font-size="9" fill="#7A6B5C">${xl}</g>
-    <path class="cfill" fill="${color}" opacity="0.10"/>
-    <path class="cline" fill="none" stroke="${color}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle class="cdot" r="5" fill="${color}" stroke="#fff" stroke-width="2"/>
-    <text class="clab" font-family="Fraunces" font-size="12" font-weight="700" fill="${color}" text-anchor="middle"></text>`;
-  const line=svg.querySelector('.cline'), fill=svg.querySelector('.cfill'),
-        dot=svg.querySelector('.cdot'), lab=svg.querySelector('.clab');
-  function pathFor(upto){
+    ${series('regular')}
+    ${series('befach')}`;
+  function refs(type){
+    return {
+      pts: POINTS[type],
+      line: svg.querySelector(`.cline-${type}`),
+      fill: svg.querySelector(`.cfill-${type}`),
+      dot:  svg.querySelector(`.cdot-${type}`),
+      lab:  svg.querySelector(`.clab-${type}`)
+    };
+  }
+  const REG = refs('regular'), BEF = refs('befach');
+  function pathFor(pts, upto){
     let d='';
     for(let m=0;m<=upto;m+=4){
       const x=X(m), y=Y(interp(pts,m));
       d += (m===0?`M${x},${y}`:` L${x},${y}`);
     }
     return { d, f: d + ` L${X(upto)},${B} L${X(0)},${B} Z` };
+  }
+  function drawSeries(s, m){
+    const p=pathFor(s.pts, m);
+    s.line.setAttribute('d',p.d); s.fill.setAttribute('d',p.f);
+    const v=interp(s.pts,m), x=X(m), y=Y(v);
+    s.dot.setAttribute('cx',x); s.dot.setAttribute('cy',y);
+    s.lab.setAttribute('x', Math.max(L+16, Math.min(x, R-16)));
+    s.lab.setAttribute('y', y-9);
+    s.lab.textContent = Math.round(v)+' mg/dL';
   }
   let timer=null;
   function animate(){
@@ -1855,20 +1876,14 @@ function setupMiniChart(svg, type){
     timer=setInterval(()=>{
       m+=5;
       if(m>=xMax){ m=xMax; clearInterval(timer); }
-      const p=pathFor(m);
-      line.setAttribute('d',p.d); fill.setAttribute('d',p.f);
-      const v=interp(pts,m), x=X(m), y=Y(v);
-      dot.setAttribute('cx',x); dot.setAttribute('cy',y);
-      lab.setAttribute('x', Math.max(L+16, Math.min(x, R-16)));
-      lab.setAttribute('y', y-9);
-      lab.textContent = Math.round(v)+' mg/dL';
+      drawSeries(REG, m);
+      drawSeries(BEF, m);
     },14);
   }
   return { animate };
 }
-const chartR = setupMiniChart(document.getElementById('chartRegular'), 'regular');
-const chartB = setupMiniChart(document.getElementById('chartBefach'), 'befach');
-function animateBoth(){ chartR.animate(); chartB.animate(); }
+const combo = setupComboChart(document.getElementById('chartCombined'));
+function animateBoth(){ combo.animate(); }
 /* re-animate each time the simulator scrolls back into view (up or down) */
 const simObs=new IntersectionObserver((es)=>{
   es.forEach(e=>{ if(e.isIntersecting) animateBoth(); });
